@@ -1,0 +1,71 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="false"
+    CodeFile="ControlPanel.master.cs" Inherits="ControlPanel_MasterPage" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder runat="server" ID="head">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <style type="text/css">
+        #cp-menu td
+        {
+            width: 150px;
+            text-align: center;
+            font-weight: bold;
+        }
+        #cp-menu a
+        {
+            font-weight: bold;
+            border-style: none;
+        }
+        
+        #cp-menu img
+        {
+        	border-style: none;
+        }
+    </style>
+    <table id="cp-menu" style="margin: 5px 20% auto 20%">
+        <tr>
+            <td>
+                <a href="Account-Home.aspx" style="text-decoration: none;">
+                    <asp:Image ID="Image1" ImageUrl="<%$ Resources:imgArticles %>" Width="64px" Height="64px" runat="server" />                    
+                    <br />
+                    <asp:Literal ID="Literal1" Text="<%$ Resources:litArticles %>" runat="server"></asp:Literal>
+                </a>
+            </td>
+            <td>
+                <a href="Media-Home.aspx" style="text-decoration: none;">
+                    <asp:Image ID="Image2" ImageUrl="<%$ Resources:imgMedia %>" Width="64px" Height="64px" runat="server" />
+                    <br />
+                    <asp:Literal ID="Literal2" Text="<%$ Resources:litMedia %>" runat="server"></asp:Literal>
+                </a>
+            </td>
+            <td>
+                <a href="Retreats-ViewList.aspx" style="text-decoration: none;">
+                    <asp:Image ID="Image3" ImageUrl="<%$ Resources:imgRetreats %>" Width="64px" Height="64px" runat="server" />
+                    <br />
+                    <asp:Literal ID="Literal3" Text="<%$ Resources:litRetreats %>" runat="server"></asp:Literal>
+                </a>
+            </td>         
+            <td>
+                <a href="ArticlePage.aspx?pageid=51152058-e0a8-41e1-970f-32aa4a5d23bb" style="text-decoration: none;">
+                    <asp:Image ID="Image4" ImageUrl="<%$ Resources:imgHelp %>" Width="64px" Height="64px" runat="server" />
+                    <br />
+                    <asp:Literal ID="Literal4" Text="<%$ Resources:litHelp %>" runat="server"></asp:Literal>
+                </a>
+            </td>
+            
+            <td runat="server" id="tdAdminLink">
+                <a href="Admin-Home.aspx" style="text-decoration: none;">
+                    <asp:Image ID="Image5" ImageUrl="<%$ Resources:imgAdmin %>" Width="64px" Height="64px" runat="server" />
+                    <br />
+                    <asp:Literal ID="Literal5" Text="<%$ Resources:litAdmin %>" runat="server"></asp:Literal>
+                </a>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <hr />
+    <asp:ContentPlaceHolder runat="server" ID="ContentPlaceHolder1">
+    </asp:ContentPlaceHolder>
+</asp:Content>

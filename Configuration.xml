@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+  <DatabaseTables>
+    <Table name="jkp_Retreat">
+      <TitleColumn>LargeRetreatDescription</TitleColumn>
+      <EditLink>
+        <URLFormatString>Retreat-AdminOptions.aspx?typename=jkp_Retreat&amp;retreatid={0}</URLFormatString>
+      </EditLink>
+    </Table>
+    <Table name="jkp_Hamlet">
+      <TitleColumn>Ham_LocalName</TitleColumn>      
+    </Table>
+    <Table name="jkp_Site">
+      <TitleColumn>Site_LocalName</TitleColumn>
+      <EditLink>
+        <URLFormatString>AddEdit.aspx?typename=jkp_Site&amp;itemid={0}</URLFormatString>        
+      </EditLink>      
+    </Table>
+    <Table name="jkp_Book">
+      <TitleColumn>Bk_Title</TitleColumn>
+      <EditLink>
+        <URLFormatString>AddEdit.aspx?typename=jkp_Book&amp;itemid={0}</URLFormatString>
+      </EditLink>
+    </Table>
+    <Table name="jkp_Audio">
+      <TitleColumn>Aud_Title</TitleColumn>
+      <EditLink>
+        <URLFormatString>AddEdit.aspx?typename=jkp_Audio&amp;itemid={0}</URLFormatString>
+      </EditLink>
+    </Table>
+    <Table name="jkp_Video">
+      <TitleColumn>Vid_Title</TitleColumn>
+      <EditLink>
+        <URLFormatString>AddEdit.aspx?typename=jkp_Video&amp;itemid={0}</URLFormatString>
+      </EditLink>
+    </Table>
+    <Table name="jkp_Image">
+      <TitleColumn>Img_Title</TitleColumn>
+      <EditLink>
+        <URLFormatString>AddEdit.aspx?typename=jkp_Image&amp;itemid={0}</URLFormatString>
+      </EditLink>
+    </Table>
+    <Table name="aspnet_Membership">
+      <TitleColumn>ListDisplayText</TitleColumn>
+      <EditLink>
+        <URLFormatString>Admin-UserOptions.aspx?userid={0}</URLFormatString>        
+      </EditLink>      
+    </Table>
+    <Table name="jkp_Rate">
+      <TitleColumn>Rt_BaseAmount</TitleColumn>      
+    </Table>
+    <Table name="jkp_RoomTypeRate">
+      <TitleColumn>RoomTypeName</TitleColumn>      
+    </Table>
+    <Table name="jkp_Contribution">
+      <TitleColumn>DisplayName</TitleColumn>      
+    </Table>
+    <Table name="jkp_Person">
+      <TitleColumn>SearchDisplayName</TitleColumn>      
+    </Table>
+  </DatabaseTables>
+  <Countries>
+    <Country>United States</Country>
+    <Country>France</Country>
+    <Country>Vietnam</Country>
+    <Country>Germany</Country>
+    <Country>The Netherlands</Country>
+  </Countries>
+</Configuration>

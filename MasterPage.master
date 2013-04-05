@@ -1,0 +1,73 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Welcome to Deer Park Monastery</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="css/default.css" rel="stylesheet" type="text/css" />
+    <link rel="SHORTCUT ICON" href="favicon.ico" />
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager runat="server" ID="scManager" EnablePartialRendering="true">
+    </asp:ScriptManager>
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>
+            <div id="menu">
+                <ul id="topNavul" class="topNavul" runat="server">
+                </ul>
+                <asp:LoginView runat="server" ID="lgv">
+                    <AnonymousTemplate>
+                        <li>
+                            <asp:HyperLink ID="HyperLink1" runat="server" Text="<%$ Resources:lblLogin %>" Font-Bold="true" NavigateUrl="~/Login.aspx"></asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="HyperLink2" runat="server" font-bolt="true" Text="<%$ Resources:lblSignup %>" NavigateUrl="~/Signup.aspx"></asp:HyperLink></li>
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                        <li>
+                            <asp:HyperLink ID="ControlPanel" runat="server" Font-Bold="true" Font-Size="80%"
+                                Text="<%$ Resources:lblControlPanel %>" NavigateUrl="~/ControlPanel.aspx"></asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink runat="server" ID="hlLogout" NavigateUrl="~/Logout.aspx" Text="Logout"></asp:HyperLink>
+                        </li>
+                    </LoggedInTemplate>
+                </asp:LoginView>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    <div id="logo">
+        <h1>
+            <a href="Default.aspx">
+                <asp:Image ID="Image1" ImageUrl="<%$ Resources:imgSiteLogo %>" runat="server" />
+                
+            </a>
+        </h1>
+    </div>
+    <div id="page">
+        <div id="content">
+            <asp:ContentPlaceHolder ID="head" runat="server">
+            </asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div style="clear: both; height: 1px;">
+        </div>
+    </div>
+    <div id="footer">
+        <div class="wrapper">
+            <div style="width: 420px; height: auto; margin: 0px 30% 0px 30%;">
+                <center style="font-size: x-small">
+                    <a href="Copyright.aspx" style="text-decoration: none; color: black;">
+                    <asp:Literal ID="Literal1" text="<%$ Resources:lblCopyright %>" runat="server"></asp:Literal></a>
+                    <br />
+                    <asp:Literal ID="Literal2" text="<%$ Resources:lblSolartag %>" runat="server"></asp:Literal>
+                </center>
+            </div>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

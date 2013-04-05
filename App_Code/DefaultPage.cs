@@ -1,0 +1,241 @@
+﻿using System;
+using System.Data;
+using System.Configuration;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+using System.Xml;
+using System.IO;
+using System.Collections.Generic;
+using System.Resources;
+using System.Threading;
+using System.Globalization;
+using System.Reflection;
+
+/// <summary>
+/// Summary description for DefaultPage
+/// </summary>
+public class DefaultPage : System.Web.UI.Page
+{
+    protected override void OnInit(EventArgs e)
+    {
+        base.OnInit(e);
+
+        
+    }
+
+    protected override void OnInitComplete(EventArgs e)
+    {
+        base.OnInitComplete(e);
+    }
+
+    protected override void InitializeCulture()
+    {
+        base.InitializeCulture();
+
+        
+        if (Session["Culture"] == null)
+        {
+            // Set the CurrentCulture property to the culture associated with the Web
+            // browser's current language setting.
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(Request.UserLanguages[0]);
+        }       
+        else
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(Session["Culture"].ToString());
+            Page.Culture = Session["Culture"].ToString();
+            Page.UICulture = Session["Culture"].ToString();
+        }
+    }
+
+    protected override void OnPreRender(EventArgs e)
+    {
+        base.OnPreRender(e);
+
+
+
+
+    }
+
+    public DefaultPage()
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+    }
+    /// <summary>
+    /// Gets the UserId for the currently logged in user. Only call if the user is logged in.
+    /// </summary>
+    protected Guid UserId
+    {
+        get
+        {
+            if (!User.Identity.IsAuthenticated)
+                throw new Exception("Only call the UserId when the user is logged in.");
+            return GetUserIdByName(User.Identity.Name);
+
+        }
+    }
+
+    public string GetResource(string resourceName)
+    {
+        string virtualPath = this.Page.Request.Path;
+        return (string)HttpContext.GetLocalResourceObject(virtualPath, resourceName);
+    }
+
+    /// <summary>
+    /// Gets the cached UserId
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public Guid GetUserIdByName(string name)
+    {
+
+        object cacheItem = Cache.Get("username_" + name);
+
+        if (cacheItem != null)
+        {
+            return (Guid)cacheItem;
+        }
+        else
+        {
+            Guid userId = (Guid)(Membership.GetUser(name).ProviderUserKey);
+            Cache.Add("username_" + name, userId, null, DateTime.Now.AddDays(1), System.Web.Caching.Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.Normal, null);
+            return userId;
+        }
+
+    }
+    /// <summary>
+    /// Takes the name of a table or column and only shows the important part. So the table name jkp_Retreats would be "Retreats" or jkp_UserName would be "User Name"
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public string GetFieldNameFromString(string propertyName)
+    {
+        string fieldName = string.Empty;
+        if (propertyName.Contains("_"))
+            fieldName = propertyName.Substring(propertyName.IndexOf("_") + 1);
+        else
+            fieldName = propertyName;
+        string newFieldName = string.Empty;
+        foreach (char fieldNameChar in fieldName.ToCharArray())
+        {
+            if (!String.IsNullOrEmpty(newFieldName) && Char.IsUpper(fieldNameChar))
+                newFieldName += " ";
+            newFieldName += fieldNameChar;
+
+        }
+        return newFieldName;
+    }
+
+    private XmlDocument Configuration
+    {
+        get
+        {
+
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(Path.Combine(Server.MapPath(""), "Configuration.xml"));
+            return xDoc;
+        }
+    }
+
+    public XmlNode DatabaseTables
+    {
+        get
+        {
+            return Configuration.GetElementsByTagName("DatabaseTables")[0];
+        }
+    }
+
+    public XmlNode GetDatabaseTable(string tableName)
+    {
+        return DatabaseTables.SelectSingleNode("Table[@name='" + tableName + "']");
+    }
+
+    public List<string> GetCountryNames
+    {
+        get
+        {
+            List<string> countryNames = new List<string>();
+
+            XmlNode countries = Configuration.GetElementsByTagName("Countries")[0];
+            foreach (XmlNode countryNode in countries)
+            {
+                string countryName = countryNode.InnerText;
+                countryNames.Add(countryName);
+            }
+            return countryNames;
+        }
+    }
+
+
+
+    public string RemoveHTMLFromText(string textToSearch)
+    {
+        try
+        {
+            string xmlFormatted = "<body>" + textToSearch + "</body>";
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.LoadXml(xmlFormatted);
+            textToSearch = xDoc.InnerText;
+            return textToSearch;
+        }
+        catch (Exception e)
+        {
+
+        }
+
+        int countOfOpenBrackets = textToSearch.Split('<').Count() - 1;
+        int countOfCloseBrackets = textToSearch.Split('>').Count() - 1;
+
+        if (countOfCloseBrackets != countOfOpenBrackets)
+        {
+            return "";
+        }
+
+        while (textToSearch.Contains('<') && textToSearch.Contains('>') && textToSearch.IndexOf('>') > -1 && textToSearch.IndexOf('<') > -1 && textToSearch.IndexOf('<') < textToSearch.IndexOf('>'))
+        {
+            textToSearch = textToSearch.Remove(textToSearch.IndexOf('<'), textToSearch.IndexOf('>') - textToSearch.IndexOf('<'));
+
+        }
+
+        textToSearch = textToSearch.Replace("<", "").Replace(">", "");
+
+        return textToSearch;
+    }
+
+    public string GetFirstParagraphWithoutHTML(string textToSearch)
+    {
+        textToSearch = RemoveHTMLFromText(textToSearch);
+        if (textToSearch.Contains(Environment.NewLine))
+            textToSearch = textToSearch.Remove(textToSearch.IndexOf(Environment.NewLine));
+        return textToSearch;
+    }
+
+
+    public string ShortenString(string stringToShorten, int maxCharLength)
+    {
+        string retShortenedString = string.Empty;
+        if (stringToShorten.Length > maxCharLength)
+        {
+            if (stringToShorten.Substring(0, maxCharLength - 1).Contains(' '))
+            {
+                retShortenedString = stringToShorten.Substring(0, stringToShorten.Substring(0, maxCharLength).LastIndexOf(' ')) + "...";
+            }
+            else
+            {
+                retShortenedString = stringToShorten.Substring(0, maxCharLength) + "...";
+            }
+        }
+        else
+            retShortenedString = stringToShorten;
+        return retShortenedString;
+    }
+
+
+}

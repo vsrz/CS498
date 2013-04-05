@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/monestary/!svn/ver/420/trunk/App_Code
+END
+DataClasses.dbml.layout
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/monestary/!svn/ver/420/trunk/App_Code/DataClasses.dbml.layout
+END
+DefaultPage.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/monestary/!svn/ver/148/trunk/App_Code/DefaultPage.cs
+END
+PayPalAPIInterfaceService.cs
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/monestary/!svn/ver/111/trunk/App_Code/PayPalAPIInterfaceService.cs
+END
+jkp_RoomType.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/monestary/!svn/ver/256/trunk/App_Code/jkp_RoomType.cs
+END
+MailSender.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/monestary/!svn/ver/413/trunk/App_Code/MailSender.cs
+END
+jkp_Contribution.cs
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/monestary/!svn/ver/372/trunk/App_Code/jkp_Contribution.cs
+END
+LoggedInPage.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/monestary/!svn/ver/401/trunk/App_Code/LoggedInPage.cs
+END
+DataClasses.designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/monestary/!svn/ver/420/trunk/App_Code/DataClasses.designer.cs
+END
+jkp_RoomTypeRate.cs
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/monestary/!svn/ver/148/trunk/App_Code/jkp_RoomTypeRate.cs
+END
+DataClasses.dbml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/monestary/!svn/ver/420/trunk/App_Code/DataClasses.dbml
+END
+ConfigHelper.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/monestary/!svn/ver/65/trunk/App_Code/ConfigHelper.cs
+END
+aspnet_Membership.cs
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/monestary/!svn/ver/409/trunk/App_Code/aspnet_Membership.cs
+END
+jkp_Site.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/monestary/!svn/ver/152/trunk/App_Code/jkp_Site.cs
+END
+Enumerations.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/monestary/!svn/ver/221/trunk/App_Code/Enumerations.cs
+END
+PaypalHelpers.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/monestary/!svn/ver/111/trunk/App_Code/PaypalHelpers.cs
+END
+jkp_Retreat.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/monestary/!svn/ver/297/trunk/App_Code/jkp_Retreat.cs
+END
+jkp_Person.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/monestary/!svn/ver/391/trunk/App_Code/jkp_Person.cs
+END

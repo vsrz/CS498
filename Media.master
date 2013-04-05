@@ -1,0 +1,98 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="false"
+    CodeFile="Media.master.cs" Inherits="Media" %>
+
+<asp:Content runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
+    <div style="float: left; width: 250px;">
+        <fieldset>
+            <legend>
+                <asp:Literal runat="server" ID="Literal1" Text="<%$ Resources:MediaSearch %>"></asp:Literal>
+            </legend>
+            <asp:UpdatePanel runat="server" ID="upanSearch">
+                <ContentTemplate>
+                    <asp:TextBox runat="server" ID="txtMediaSearch"></asp:TextBox>
+                    <br />
+                    <asp:RadioButton runat="server" ID="rbtnVideo" Text="Videos" GroupName="Search" />
+                    <br />
+                    <asp:RadioButton runat="server" ID="rbtnBooks" Text="Books" GroupName="Search" />
+                    <br />
+                    <asp:RadioButton runat="server" ID="rbtnAudio" Text="Audio" GroupName="Search" />
+                    <br />
+                    <asp:Button runat="server" ID="btnSearchMedia" Text="<%$ Resources:btnSearchMedia %>" OnClick="btnSearchMedia_Clicked" />
+                    <br />
+                    <asp:Panel runat="server" ID="pnlSearchResults">
+                        <hr />
+                        <asp:Literal runat="server" ID="Literal2" Text="<%$ Resources:Results %>"></asp:Literal>
+                        <br />
+                        <asp:DataGrid ID="gridSearchResults" runat="server" OnItemDataBound="dataGrid_OnItemDataBound" AutoGenerateColumns="false" BorderColor="White" AllowPaging="true" PageSize="5" PagerSettings-Visible="false">
+                            <Columns>
+                                <asp:TemplateColumn>
+                                    <HeaderTemplate>
+                                        
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:HyperLink ID="hlItemTitle" runat="server"></asp:HyperLink>
+                                    </ItemTemplate>
+                                </asp:TemplateColumn>
+                            </Columns>
+                            <PagerStyle Visible="false" />                            
+                        </asp:DataGrid>
+                    </asp:Panel>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </fieldset>
+        <fieldset>
+            <legend>
+                <asp:Literal runat="server" ID="Literal3" Text="<%$ Resources:FeaturedVideos %>"></asp:Literal>
+            </legend>
+            <asp:LinqDataSource ID="linqFeaturedVideos" runat="server" ContextTypeName="MonkData"
+                TableName="jkp_Videos">
+            </asp:LinqDataSource>
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Vid_ID"
+                DataSourceID="linqFeaturedVideos" Width="215px" BorderColor="White" AllowPaging="true"
+                PageSize="5" PagerSettings-Visible="false">
+                <Columns>
+                    <asp:HyperLinkField DataNavigateUrlFields="Vid_ID" DataNavigateUrlFormatString="Media-ViewVideo.aspx?videoid={0}"
+                        DataTextField="Vid_Title" />
+                </Columns>
+            </asp:GridView>
+        </fieldset>
+        <fieldset>
+            <legend>
+                <asp:Literal runat="server" ID="Literal4" Text="<%$ Resources:FeaturedBooks %>"></asp:Literal>
+            </legend>
+            <asp:LinqDataSource ID="LinqDataSource1" runat="server" ContextTypeName="MonkData"
+                Select="new (Bk_Title, Bk_ID)" TableName="jkp_Books">
+            </asp:LinqDataSource>
+            <asp:GridView ID="gridBooks" runat="server" AutoGenerateColumns="False" Width="215px"
+                BorderColor="White" AllowPaging="True" PageSize="5" PagerSettings-Visible="false"
+                DataSourceID="LinqDataSource1">
+                <PagerSettings Visible="False"></PagerSettings>
+                <Columns>
+                    <asp:HyperLinkField DataNavigateUrlFields="Bk_ID" DataNavigateUrlFormatString="Media-ViewBook.aspx?bookid={0}"
+                        DataTextField="Bk_Title" />
+                </Columns>
+            </asp:GridView>
+        </fieldset>
+        <fieldset>
+            <legend>
+                <asp:Literal runat="server" ID="Literal5" Text="<%$ Resources:FeaturedAudio %>"></asp:Literal>
+            </legend>
+            <asp:LinqDataSource ID="linqAudio" runat="server" ContextTypeName="MonkData" Select="new (Aud_Title, Aud_ID)"
+                TableName="jkp_Audios">
+            </asp:LinqDataSource>
+            <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" Width="215px"
+                BorderColor="White" AllowPaging="True" PageSize="5" PagerSettings-Visible="false"
+                DataSourceID="linqAudio">
+                <PagerSettings Visible="False"></PagerSettings>
+                <Columns>
+                    <asp:HyperLinkField DataNavigateUrlFields="Aud_ID" DataNavigateUrlFormatString="Media-ViewAudio.aspx?audioid={0}"
+                        DataTextField="Aud_Title" />
+                </Columns>
+            </asp:GridView>
+        </fieldset>
+    </div>
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+</asp:Content>

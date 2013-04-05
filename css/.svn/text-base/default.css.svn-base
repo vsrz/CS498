@@ -1,0 +1,596 @@
+/*
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: #ffffff url(../dpimages/heading-black.gif) repeat-x;
+	font: normal 13px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color: #000000 /*#88888A*/;
+}
+
+h1, h2, h3 {
+	color: #313131;
+}
+
+h1 {
+	margin-bottom: .5em;
+	font-size: 182%;
+	font-weight: normal;
+	letter-spacing: -2px;
+}
+
+h2 {
+	margin-bottom: .5em;
+	font-size: 136%;
+	font-weight: normal;
+	letter-spacing: -1px;
+}
+
+h3 {
+	font-size: 100%;
+	font-weight: bold;
+}
+
+p, blockquote, ol, ul {
+	margin-bottom: 1.5em;
+	text-align: justify;
+	font-size: 107%;
+}
+
+blockquote {
+	margin-left: 2em;
+}
+
+ol {
+	margin-left: 2em;
+}
+
+ul {
+	list-style: none;
+}
+
+ul li {
+	padding-left: 1em;
+	vertical-align: top;
+	background: url(../dpimages/bullet-brown.gif) no-repeat left center;		
+	margin-right: 1em;
+	margin-bottom: .5em;
+}
+
+a {
+	text-decoration: none;
+	color: #0000CC;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #339900;
+}
+
+/* Admin-Home */
+.Admin-home ol {
+	margin-left: 2em;
+}
+
+.Admin-home ul {
+	list-style: none;
+}
+
+.Admin-home ul li {	
+	vertical-align: top;	
+	background-image: none;
+	margin-right: 1em;
+	padding-left: 0;
+	margin-bottom: .5em;
+}
+
+.Admin-home a 
+{
+	padding-left: 1em;
+	background: url(../dpimages/bullet-brown.gif) no-repeat left center;		
+}
+
+
+.Admin-home fieldset
+{
+	border-width: 3px;
+	border-style: solid;
+	margin-right: 10px;
+}
+
+.Admin-home legend
+{
+	font-size: 14px;
+	font-weight: bold;
+	color: brown;
+	padding-left: 4px;
+	padding-right: 5px;
+}
+
+
+/* Menu */
+
+#menu {
+	width: 960px;
+	height: 60px;
+	margin: 0 auto;
+	border-left: 26px solid brown;
+}
+
+#menu ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#menu li {
+	padding: 0;
+	display: inline;
+	background: none;
+}
+
+#menu a {
+	display: block;
+	float: left;
+	height: 40px;
+	padding: 20px 20px 0 20px;
+	font-size: 80%;
+	font-weight: bold;
+}
+
+#menu a:hover {
+	background: brown;
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+
+#menu b {
+	text-decoration: underline;
+}
+
+/* Logo */
+
+#logo {
+	width: 980px;/*760px;*/
+	height: 180px;
+	margin: 0 auto 0 auto;
+	background: #7F3300/*#010100*/ url(../dpimages/heading-robe.jpg)
+}
+
+#logo h1 {
+	margin: 0;
+	padding: 85px 20px 30px 0;
+	text-align: right;
+	letter-spacing: -1px;
+	border-style:none;
+	font-size: 189%;
+}
+
+#logo h2 {
+	margin: 0;
+	padding: 0 0 0 0;
+	text-align: right;
+	letter-spacing: -1px;
+	font-size: 100%;
+	font-weight: bold;
+	font-style: italic;
+}
+
+#logo a {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+/* Page */
+
+#page {
+	width: 980px/*760px*/;
+	margin: 0 auto;
+	background: url(../dpimages/body-bg.gif) repeat-y;
+}
+
+/* Content */
+
+#content {
+	float: left;
+	width: 945px;
+	margin-left: 35px;
+	margin-top: 12px;
+}
+
+#welcome {
+	margin-bottom: 20px;
+	padding-bottom: 1px;
+	background: url(../dpimages/body-greydots.gif) repeat-x left bottom;
+}
+
+.floating-box {
+	float: left;
+	width: 210px;
+}
+
+.floating-box p, .floating-box blockquote, .floating-box ol, .floating-box ul {
+	/*line-height: 144%;*/
+	font-size: 92%;
+}
+
+.floating-box img {
+	border: 5px solid #FFFFFF;
+}
+
+/* Sidebar */
+
+#sidebar {
+	float: right;
+	width: 200px;
+	padding: 20px;
+}
+
+#sidebar blockquote {
+	margin-left: 0;
+	padding-left: 1em;
+	background: url(../dpimages/body-quotes.gif) no-repeat right bottom;
+	border-left: 5px solid #339900;
+}
+
+#sidebar blockquote p {
+	text-align: left;
+	line-height: normal;
+	font-style: italic;
+}
+
+#links {
+}
+
+#links ul {
+	background: url(../dpimages/body-greydots.gif) repeat-x left bottom;
+}
+
+#links li {
+	padding: 5px 0;
+	background: url(../dpimages/body-greydots.gif) repeat-x left top;
+}
+
+#links a {
+	padding-left: 1em;
+	background: url(../dpimages/body-redarrow.gif) no-repeat left center;
+	color: #339900;
+}
+
+/* Footer */
+
+#footer 
+{
+    margin: 0 auto;
+    width: 980px;
+	height: 50px;
+	border-top: 0px solid #FFFFFF;
+	border-bottom: 0px solid #FFFFFF;
+	background: url(../dpimages/body-bg.gif) repeat-y;
+}
+
+#footer .wrapper {
+	width: 954px;
+	height: 50px;
+	margin: 0 auto;
+	border-left: 26px solid brown;
+}
+
+#footer .links {
+	float: left;
+	width: 440px;
+	height: 34px;
+	padding: 16px 30px 0 30px;
+	background: #FFFFFF;
+	border-left: 20px solid #010100;
+	font-size: 85%;
+}
+
+#footer .legal {
+	float: right;
+	width: 440px;
+	height: 34px;
+	margin: 0 auto;
+	padding: 16px 20px 0 0;
+	background: #339900;
+	text-align: right;
+	font-size: 85%;
+	color: #FFFFFF;
+}
+
+/* ---- SPECIAL PAGES ------ */
+.view-items-grid
+{
+	border-width: 0px;
+}
+.view-items-grid-item
+{
+	border-width: 2px;
+	border-color: Gray;
+}
+#grid-view table, tr, td
+{
+	border-width: 0px;
+	border-style: none;
+}
+
+#grid-view table
+{
+	width: 100%;
+}
+
+fieldset
+{
+	border-width: 3px;
+	border-style: solid;
+	margin-right: 10px;
+}
+
+legend
+{
+	font-size: 14px;
+	font-weight: bold;
+	color: brown;
+	padding-left: 4px;
+	padding-right: 5px;
+}
+
+h1
+{
+	color: brown;
+	line-height: 25px;
+}
+/* ---- Signup Page Template ---- */
+#signupPageContainer
+{
+	border: 5px auto auto auto;
+	height: 360px;
+	width: 980px;
+}
+
+#signupAccountInformation
+{
+	border: 5px auto auto auto;
+	width: 48%;
+	height: 360px;
+	margin-right: 6px;
+	float: left;
+}
+
+#signupAccountInformation fieldset
+{
+	border-width: 3px;
+	border-style: solid;
+	margin-right: 6px;
+	padding: 3px 3px 3px 3px;
+	width: 450px;
+	height: 360px;
+}
+
+#signupPersonalInformation legend
+{
+	font-size: 14px;
+	font-weight: bold;
+	color: brown;
+	padding-left: 4px;
+	padding-right: 5px;
+}
+
+
+#signupPersonalInformation 
+{
+	border: 5px auto auto auto;
+	float: right;
+	height: 360px;
+	width: 48%;
+	
+}
+
+#signupPersonalInformation fieldset
+{
+	border-width: 3px;
+	border-style: solid;
+	padding: 3px 3px 3px 3px;
+	width: 450px;
+	height: 100%;
+}
+
+#signupPersonalInformation legend
+{
+	font-size: 14px;
+	font-weight: bold;
+	color: brown;
+	padding-left: 4px;
+	padding-right: 5px;
+}
+
+/* ---- Events Page Template ---- */
+
+#eventsContainer
+{
+	width: 820px;
+	height: auto;
+	min-height: 640px;
+	margin: 0px 5% auto 5%;
+	text-align: center;
+}
+#eventsTopPane
+{
+	width: 820px;
+	height: 80px;
+	margin-bottom: 8px;
+}
+#eventsTopPane fieldset
+{
+	width: 820px;
+	border-width: 3px;
+	border-style: solid;
+	margin-right: 6px;
+	padding: 3px 3px 3px 3px;
+	height: auto;
+}
+
+#eventsTopPane legend
+{
+	font-size: 14px;
+	font-weight: bold;
+	color: brown;
+	padding-left: 4px;
+	padding-right: 5px;
+}	
+#eventsBottomPane
+{
+	width: 820px;
+	height: auto;
+}
+#eventsLeftPane
+{
+	width: 25%;
+	height: inherit;
+	min-height: inherit;
+	float: left;
+	text-align: left;
+	background-color: #dddddd;
+	padding: 0 4px;
+}
+#eventsRightPane
+{
+	width: 74%;
+	height: auto;
+	min-height: inherit;
+	left: 0px;
+	float: right;
+	background-color: #eeeeee;
+	vertical-align: top;
+}
+
+#left-panel
+{
+	float: left;
+	width: 400px;
+}
+
+#right-panel
+{
+}
+
+
+.popup-panel
+{
+	border-color: Brown;
+	border-width: 4px;
+	width: 400px;
+	background-color: White;
+	border-style: solid;
+	padding: 10px 10px 10px 10px;
+}
+
+.sidebar-details
+{
+	float: right; 
+	width: 250px; 
+	font-size: 11px; 
+	font-weight: bold; 
+	border-color:#A0854D; 
+	background-color: #D3C6AC; 
+	border-width: 3px; 
+	border-style: solid; 
+	padding-left: 5px; 
+	padding-top: 5px; 
+	padding-bottom: 5px; 
+	margin-left: 10px; 
+	margin-bottom: 10px;
+}
+
+.sidebar-details br
+{
+	margin-bottom: 10px;
+}
+
+.sidebar-details h2
+{
+	font-size: 16px;
+	margin-bottom: 0px;
+	height: 20px;
+}
+
+/* Media-PublicView.aspx */
+#Media-PublicView_IconView a
+{
+	
+}
+
+/*Retreat-Registration.aspx*/
+.roomTypeSelectTable tr th
+{
+    width: 95px;
+}
+
+.roomTypeSelectTable tbody tr td
+{
+	text-align:center;
+}
+
+.pastPersonFieldset
+{
+	width: 70%;
+}
+
+.newPersonFieldset
+{
+	width: 70%;
+}
+
+.dlHowManyDiv
+{
+	float: right;
+	margin-right: 60%;
+}
+
+.paymentWrapDiv
+{
+	width: 980px;
+	height: 500px;
+}
+
+.paymentInfoDiv1
+{
+	width: 50%; 
+	height: 100%; 
+	float: left;
+}
+
+.paymentInfoDiv2
+{
+	width: 50%; 
+	height: 100%; 
+	float: right;
+}
+
+.reviewFieldset
+{
+	width: 75%;
+}
+
+.reviewTable tbody tr th
+{
+	padding-right: 10px;
+}
+
+.reviewTable tbody tr td
+{
+	text-align:center;
+}
+
+.strongGrandTotal
+{
+	margin-left: 80%;
+}

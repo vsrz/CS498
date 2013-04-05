@@ -1,0 +1,136 @@
+﻿using System;
+using System.Data;
+using System.Configuration;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+
+/// <summary>
+/// Summary description for LoggedInPage
+/// </summary>
+public class LoggedInPage : DefaultPage
+{
+    protected override void OnInit(EventArgs e)
+    {
+
+        base.OnInit(e);
+        if (!User.Identity.IsAuthenticated)
+        {
+            Server.Transfer(Page.ResolveClientUrl("~/Login.aspx?returnUrl=" + Uri.EscapeDataString(Request.Url.AbsoluteUri)), true);
+            return;
+        }
+        MonkData db = new MonkData();
+
+        CanUserAccessPage(Page.Request.Url.Segments[Request.Url.Segments.Length - 1], true, ref db);
+        
+        //MonkData db = new MonkData();
+
+        //var rolesForPage = from r in db.aspnet_PageUnderRoles
+        //                   where r.FilePath == Page.Request.Url.Segments[Request.Url.Segments.Length - 1]
+        //                   select r;
+
+        //if (rolesForPage.Count() > 0 && bool.Parse(ConfigurationManager.AppSettings["EnableRoles"]))
+        //{
+
+        //    var userInRoles = from p in db.aspnet_UsersInRoles
+        //                      where p.UserId == UserId && p.aspnet_Role.aspnet_PageUnderRoles.Where(j => j.FilePath == Page.Request.Url.Segments[Request.Url.Segments.Length - 1]).Count() > 0
+        //                      select p;
+        //    if (userInRoles.Count() == 0)
+        //    {
+
+
+        //        string rolesNeedToAccessPage = string.Empty;
+        //        foreach (Monks.aspnet_PageUnderRole pageUnderRole in rolesForPage)
+        //        {
+        //            if (!String.IsNullOrEmpty(rolesNeedToAccessPage))
+        //                rolesNeedToAccessPage += ", ";
+        //            rolesNeedToAccessPage += pageUnderRole.aspnet_Role.RoleName;
+        //        }
+        //        Response.Redirect("Access-Denied.aspx?reason=" + Uri.EscapeDataString(rolesNeedToAccessPage), true);
+        //        return;
+        //    }
+        //}
+    }
+
+    public bool CanUserAccessPage(string pagePath, bool redirectOnNoAccess, ref MonkData db )
+    {
+        
+
+        var rolesForPage = from r in db.aspnet_PageUnderRoles
+                           where r.FilePath == pagePath
+                           select r;
+        // We know there is a role applied to this page if there are more than 0 roles and we only want to check if roles are enabled.
+        if (rolesForPage.Count() > 0 && bool.Parse(ConfigurationManager.AppSettings["EnableRoles"]))
+        {
+
+            var userInRoles = from p in db.aspnet_UsersInRoles
+                              where p.UserId == UserId && p.aspnet_Role.aspnet_PageUnderRoles.Where(j => j.FilePath == pagePath).Count() > 0
+                              select p;
+            // If it's equal to zero the user doesn't have permission to access this page but we want to possibly
+            // redirect them to a page telling them why they can't access it. 
+            if (userInRoles.Count() == 0)
+            {
+                
+                string rolesNeedToAccessPage = string.Empty;
+                foreach (Monks.aspnet_PageUnderRole pageUnderRole in rolesForPage)
+                {
+                    if (!String.IsNullOrEmpty(rolesNeedToAccessPage))
+                        rolesNeedToAccessPage += ", ";
+                    rolesNeedToAccessPage += pageUnderRole.aspnet_Role.RoleName;
+                }
+
+                if(redirectOnNoAccess)
+                    Response.Redirect("Access-Denied.aspx?reason=" + Uri.EscapeDataString(rolesNeedToAccessPage), true);
+
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void CheckTablePermission()
+    {
+        MonkData db = new MonkData();
+        bool canAccessTable = CanUserAccessTable(Request.QueryString["typename"], true, ref db);
+        
+        
+    }
+
+    public bool CanUserAccessTable(string tableName, bool redirectUserOnFailure, ref MonkData db)
+    {
+        
+        var rolesForPage = from r in db.aspnet_TableUnderRoles
+                           where r.TableName.Contains(tableName)
+                           select r;
+        if (rolesForPage.Count() > 0 && bool.Parse(ConfigurationManager.AppSettings["EnableRoles"]))
+        {
+            // Check if the current user is in the role that has access to this page.
+            var userInRoles = from p in db.aspnet_UsersInRoles
+                              where p.UserId == UserId && p.aspnet_Role.aspnet_TableUnderRoles.Where(j => j.TableName.Contains( tableName)).Count() > 0
+                              select p;
+            if (userInRoles.Count() == 0)
+            {
+
+                string rolesNeedToAccessPage = string.Empty;
+                foreach (Monks.aspnet_TableUnderRole pageUnderRole in rolesForPage)
+                {
+                    if (!String.IsNullOrEmpty(rolesNeedToAccessPage))
+                        rolesNeedToAccessPage += ", ";
+                    rolesNeedToAccessPage += pageUnderRole.aspnet_Role.RoleName;
+                }
+                
+                if(redirectUserOnFailure)
+                    Response.Redirect("Access-Denied.aspx?reason=" + Uri.EscapeDataString(rolesNeedToAccessPage), true);
+
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+}

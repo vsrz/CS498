@@ -1,0 +1,1071 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="monks_stg" EntityNamespace="Monks" Class="MonkData" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=67.199.15.191,2301;Initial Catalog=monks_stg;Persist Security Info=True;User ID=jkp" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="monks_stgConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.jkp_Visa" Member="jkp_Visas">
+    <Type Name="jkp_Visa">
+      <Column Name="Visa_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Visa_Per_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Visa_Number" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Visa_Status" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Visa_DateIssued" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Visa_DateExpires" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Visa_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Visa_Image" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Association Name="jkp_Person_jkp_Visa" Member="jkp_Person" ThisKey="Visa_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Applications" Member="aspnet_Applications">
+    <Type Name="aspnet_Application">
+      <Column Name="ApplicationName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredApplicationName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Association Name="aspnet_Application_aspnet_Membership" Member="aspnet_Memberships" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Membership" />
+      <Association Name="aspnet_Application_aspnet_Path" Member="aspnet_Paths" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Path" />
+      <Association Name="aspnet_Application_aspnet_Role" Member="aspnet_Roles" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Role" />
+      <Association Name="aspnet_Application_aspnet_User" Member="aspnet_Users" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_User" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Membership" Member="aspnet_Memberships">
+    <Type Name="aspnet_Membership">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordFormat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordSalt" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="MobilePIN" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="LoweredEmail" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="PasswordQuestion" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="PasswordAnswer" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="IsApproved" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsLockedOut" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastLoginDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastPasswordChangedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastLockoutDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FailedPasswordAttemptCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FailedPasswordAttemptWindowStart" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FailedPasswordAnswerAttemptCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FailedPasswordAnswerAttemptWindowStart" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PersonId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_Application_aspnet_Membership" Member="aspnet_Application" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Application" IsForeignKey="true" />
+      <Association Name="aspnet_User_aspnet_Membership" Member="aspnet_User" ThisKey="UserId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+      <Association Name="jkp_Person_aspnet_Membership" Member="jkp_Person" ThisKey="PersonId" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_MenuItem" Member="aspnet_MenuItems">
+    <Type Name="aspnet_MenuItem">
+      <Column Name="MenuItemId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Summary" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="LinkText" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="LinkLocation" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="ParentMenuItem" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="aspnet_MenuItem_aspnet_MenuItem" Member="aspnet_MenuItems" ThisKey="MenuItemId" OtherKey="ParentMenuItem" Type="aspnet_MenuItem" />
+      <Association Name="aspnet_MenuItem_aspnet_MenuItem" Member="aspnet_MenuItem1" ThisKey="ParentMenuItem" OtherKey="MenuItemId" Type="aspnet_MenuItem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_PageUnderRole" Member="aspnet_PageUnderRoles">
+    <Type Name="aspnet_PageUnderRole">
+      <Column Name="PageId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FilePath" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_Role_aspnet_PageUnderRole" Member="aspnet_Role" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_Role" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Paths" Member="aspnet_Paths">
+    <Type Name="aspnet_Path">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="PathId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Path" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredPath" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_Path_aspnet_PersonalizationAllUser" Member="aspnet_PersonalizationAllUser" ThisKey="PathId" OtherKey="PathId" Type="aspnet_PersonalizationAllUser" Cardinality="One" />
+      <Association Name="aspnet_Path_aspnet_PersonalizationPerUser" Member="aspnet_PersonalizationPerUsers" ThisKey="PathId" OtherKey="PathId" Type="aspnet_PersonalizationPerUser" />
+      <Association Name="aspnet_Application_aspnet_Path" Member="aspnet_Application" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Application" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_PersonalizationAllUsers" Member="aspnet_PersonalizationAllUsers">
+    <Type Name="aspnet_PersonalizationAllUser">
+      <Column Name="PathId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PageSettings" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="LastUpdatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_Path_aspnet_PersonalizationAllUser" Member="aspnet_Path" ThisKey="PathId" OtherKey="PathId" Type="aspnet_Path" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_PersonalizationPerUser" Member="aspnet_PersonalizationPerUsers">
+    <Type Name="aspnet_PersonalizationPerUser">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PathId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="PageSettings" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="LastUpdatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_Path_aspnet_PersonalizationPerUser" Member="aspnet_Path" ThisKey="PathId" OtherKey="PathId" Type="aspnet_Path" IsForeignKey="true" />
+      <Association Name="aspnet_User_aspnet_PersonalizationPerUser" Member="aspnet_User" ThisKey="UserId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Profile" Member="aspnet_Profiles">
+    <Type Name="aspnet_Profile">
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PropertyNames" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PropertyValuesString" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PropertyValuesBinary" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="LastUpdatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_User_aspnet_Profile" Member="aspnet_User" ThisKey="UserId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Roles" Member="aspnet_Roles">
+    <Type Name="aspnet_Role">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredRoleName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Association Name="aspnet_Role_aspnet_PageUnderRole" Member="aspnet_PageUnderRoles" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_PageUnderRole" />
+      <Association Name="aspnet_Role_aspnet_TableUnderRole" Member="aspnet_TableUnderRoles" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_TableUnderRole" />
+      <Association Name="aspnet_Role_aspnet_UsersInRole" Member="aspnet_UsersInRoles" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_UsersInRole" />
+      <Association Name="aspnet_Role_jkp_MediaRole" Member="jkp_MediaRoles" ThisKey="RoleId" OtherKey="RoleId" Type="jkp_MediaRole" />
+      <Association Name="aspnet_Application_aspnet_Role" Member="aspnet_Application" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Application" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_SchemaVersions" Member="aspnet_SchemaVersions">
+    <Type Name="aspnet_SchemaVersion">
+      <Column Name="Feature" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CompatibleSchemaVersion" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IsCurrentVersion" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_TableUnderRole" Member="aspnet_TableUnderRoles">
+    <Type Name="aspnet_TableUnderRole">
+      <Column Name="TableUnderRoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="TableName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ViewData" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="EditData" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DeleteData" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="InsertData" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_Role_aspnet_TableUnderRole" Member="aspnet_Role" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_Role" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Users" Member="aspnet_Users">
+    <Type Name="aspnet_User">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredUserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileAlias" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="IsAnonymous" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LastActivityDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_User_aspnet_Membership" Member="aspnet_Membership" ThisKey="UserId" OtherKey="UserId" Type="aspnet_Membership" Cardinality="One" />
+      <Association Name="aspnet_User_aspnet_PersonalizationPerUser" Member="aspnet_PersonalizationPerUsers" ThisKey="UserId" OtherKey="UserId" Type="aspnet_PersonalizationPerUser" />
+      <Association Name="aspnet_User_aspnet_Profile" Member="aspnet_Profile" ThisKey="UserId" OtherKey="UserId" Type="aspnet_Profile" Cardinality="One" />
+      <Association Name="aspnet_User_aspnet_UsersInRole" Member="aspnet_UsersInRoles" ThisKey="UserId" OtherKey="UserId" Type="aspnet_UsersInRole" />
+      <Association Name="aspnet_Application_aspnet_User" Member="aspnet_Application" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Application" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_UsersInRoles" Member="aspnet_UsersInRoles">
+    <Type Name="aspnet_UsersInRole">
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="aspnet_Role_aspnet_UsersInRole" Member="aspnet_Role" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_Role" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="aspnet_User_aspnet_UsersInRole" Member="aspnet_User" ThisKey="UserId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_WebEvent_Events" Member="aspnet_WebEvent_Events">
+    <Type Name="aspnet_WebEvent_Event">
+      <Column Name="EventId" Type="System.String" DbType="Char(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EventTimeUtc" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EventTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EventType" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="EventSequence" Type="System.Decimal" DbType="Decimal(19,0) NOT NULL" CanBeNull="false" />
+      <Column Name="EventOccurrence" Type="System.Decimal" DbType="Decimal(19,0) NOT NULL" CanBeNull="false" />
+      <Column Name="EventCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EventDetailCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="ApplicationPath" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="ApplicationVirtualPath" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="MachineName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="RequestUrl" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="ExceptionType" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="Details" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Account" Member="jkp_Accounts">
+    <Type Name="jkp_Account">
+      <Column Name="Acc_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Acc_Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Acc_Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="jkp_Account_jkp_ContributionAccount" Member="jkp_ContributionAccounts" ThisKey="Acc_ID" OtherKey="CA_Acc_ID" Type="jkp_ContributionAccount" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Actions" Member="jkp_Actions">
+    <Type Name="jkp_Action">
+      <Column Name="A_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="A_Name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="jkp_Action_jkp_AuthorityMediaAction" Member="jkp_AuthorityMediaActions" ThisKey="A_ID" OtherKey="AMA_A_ID" Type="jkp_AuthorityMediaAction" />
+      <Association Name="jkp_Action_jkp_AuthorityTablesAction" Member="jkp_AuthorityTablesActions" ThisKey="A_ID" OtherKey="ATA_A_ID" Type="jkp_AuthorityTablesAction" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Activity" Member="jkp_Activities">
+    <Type Name="jkp_Activity">
+      <Column Name="Act_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Act_Name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Act_Language" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Act_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Act_StartTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Act_EndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Act_Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Act_Ret_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="jkp_Activity_jkp_AudioActivity" Member="jkp_AudioActivities" ThisKey="Act_ID" OtherKey="AA_Act_ID" Type="jkp_AudioActivity" />
+      <Association Name="jkp_Activity_jkp_BookActivity" Member="jkp_BookActivities" ThisKey="Act_ID" OtherKey="BA_Act_ID" Type="jkp_BookActivity" />
+      <Association Name="jkp_Activity_jkp_DocumentActivity" Member="jkp_DocumentActivities" ThisKey="Act_ID" OtherKey="DA_Act_ID" Type="jkp_DocumentActivity" />
+      <Association Name="jkp_Activity_jkp_ImageActivity" Member="jkp_ImageActivities" ThisKey="Act_ID" OtherKey="IA_Act_ID" Type="jkp_ImageActivity" />
+      <Association Name="jkp_Activity_jkp_PersonActivity" Member="jkp_PersonActivities" ThisKey="Act_ID" OtherKey="PAct_Act_ID" Type="jkp_PersonActivity" />
+      <Association Name="jkp_Activity_jkp_PersonAssignmentActivity" Member="jkp_PersonAssignmentActivities" ThisKey="Act_ID" OtherKey="PAA_Act_ID" Type="jkp_PersonAssignmentActivity" />
+      <Association Name="jkp_Activity_jkp_Training" Member="jkp_Trainings" ThisKey="Act_ID" OtherKey="Train_Act_ID" Type="jkp_Training" />
+      <Association Name="jkp_Activity_jkp_VideoActivity" Member="jkp_VideoActivities" ThisKey="Act_ID" OtherKey="VA_Act_ID" Type="jkp_VideoActivity" />
+      <Association Name="jkp_Retreat_jkp_Activity" Member="jkp_Retreat" ThisKey="Act_Ret_ID" OtherKey="Ret_ID" Type="jkp_Retreat" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Address" Member="jkp_Addresses">
+    <Type Name="jkp_Address">
+      <Column Name="Add_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Add_Street" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Add_City" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Add_State" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Add_Country" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Add_PostalCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Add_San_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="jkp_Address_jkp_Hamlet" Member="jkp_Hamlets" ThisKey="Add_ID" OtherKey="Ham_Add_ID" Type="jkp_Hamlet" />
+      <Association Name="jkp_Address_jkp_Person" Member="jkp_Persons" ThisKey="Add_ID" OtherKey="Per_Add_ID" Type="jkp_Person" />
+      <Association Name="jkp_Address_jkp_Site" Member="jkp_Sites" ThisKey="Add_ID" OtherKey="Site_Add_ID" Type="jkp_Site" />
+      <Association Name="jkp_Sangha_jkp_Address" Member="jkp_Sangha" ThisKey="Add_San_ID" OtherKey="San_ID" Type="jkp_Sangha" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Adjustment" Member="jkp_Adjustments">
+    <Type Name="jkp_Adjustment">
+      <Column Name="Adjust_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Adjust_Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Adjust_Discount" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Association Name="jkp_Adjustment_jkp_RoomTypeAdjustment" Member="jkp_RoomTypeAdjustments" ThisKey="Adjust_ID" OtherKey="RTA_Adjust_ID" Type="jkp_RoomTypeAdjustment" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Article" Member="jkp_Articles">
+    <Type Name="jkp_Article">
+      <Column Name="Art_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Art_LanguageId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Art_AuthorPersonId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Art_Created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Art_Title" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="Art_Content" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Art_LinkTitle" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Art_CategoryId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="jkp_ArticleCategory_jkp_Article" Member="jkp_ArticleCategory" ThisKey="Art_CategoryId" OtherKey="ArtCat_ID" Type="jkp_ArticleCategory" IsForeignKey="true" />
+      <Association Name="jkp_Language_jkp_Article" Member="jkp_Language" ThisKey="Art_LanguageId" OtherKey="Lang_ID" Type="jkp_Language" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_Article" Member="jkp_Person" ThisKey="Art_AuthorPersonId" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_ArticleCategory" Member="jkp_ArticleCategories">
+    <Type Name="jkp_ArticleCategory">
+      <Column Name="ArtCat_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ArtCat_Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ArtCat_Created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="jkp_ArticleCategory_jkp_Article" Member="jkp_Articles" ThisKey="ArtCat_ID" OtherKey="Art_CategoryId" Type="jkp_Article" />
+      <Association Name="jkp_ArticleCategory_jkp_ArticlePage" Member="jkp_ArticlePages" ThisKey="ArtCat_ID" OtherKey="ArtP_CategoryId" Type="jkp_ArticlePage" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_ArticlePage" Member="jkp_ArticlePages">
+    <Type Name="jkp_ArticlePage">
+      <Column Name="ArtP_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ArtP_ResxTitle" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="ArtP_ResxHeaderName" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="ArtP_Created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ArtP_CategoryId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ArtP_DefaultBodyText" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="jkp_ArticleCategory_jkp_ArticlePage" Member="jkp_ArticleCategory" ThisKey="ArtP_CategoryId" OtherKey="ArtCat_ID" Type="jkp_ArticleCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Assignment" Member="jkp_Assignments">
+    <Type Name="jkp_Assignment">
+      <Column Name="Assn_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Assn_Name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Assn_Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Assn_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Assn_RetreatId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="jkp_Assignment_jkp_PersonAssignmentActivity" Member="jkp_PersonAssignmentActivities" ThisKey="Assn_ID" OtherKey="PAA_Assn_ID" Type="jkp_PersonAssignmentActivity" />
+      <Association Name="jkp_Assignment_jkp_PersonAssignmentRetreat" Member="jkp_PersonAssignmentRetreats" ThisKey="Assn_ID" OtherKey="PAR_Assn_ID" Type="jkp_PersonAssignmentRetreat" />
+      <Association Name="jkp_Retreat_jkp_Assignment" Member="jkp_Retreat" ThisKey="Assn_RetreatId" OtherKey="Ret_ID" Type="jkp_Retreat" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Audio" Member="jkp_Audios">
+    <Type Name="jkp_Audio">
+      <Column Name="Aud_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Aud_Pathname" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Aud_Size" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Aud_Duration" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="Aud_DateAdded" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Aud_DateModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Aud_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Aud_Genre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Aud_Language" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Aud_Subject" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Aud_Contents" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Aud_Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Aud_Summary" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Aud_Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Aud_Disc_Number" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Aud_Track_Number" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Aud_Coll_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Aud_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Aud_FileTypeId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Aud_Presenter" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Aud_PreviewSmallUrl" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Aud_PreviewLargeUrl" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Aud_Featured" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="jkp_Audio_jkp_AudioActivity" Member="jkp_AudioActivities" ThisKey="Aud_ID" OtherKey="AA_Aud_ID" Type="jkp_AudioActivity" />
+      <Association Name="jkp_Audio_jkp_MediaRole" Member="jkp_MediaRoles" ThisKey="Aud_ID" OtherKey="AudioId" Type="jkp_MediaRole" />
+      <Association Name="jkp_Audio_jkp_PersonAudio" Member="jkp_PersonAudios" ThisKey="Aud_ID" OtherKey="PA_Aud_ID" Type="jkp_PersonAudio" />
+      <Association Name="jkp_Collection_jkp_Audio" Member="jkp_Collection" ThisKey="Aud_Coll_ID" OtherKey="Coll_ID" Type="jkp_Collection" IsForeignKey="true" />
+      <Association Name="jkp_FileType_jkp_Audio" Member="jkp_FileType" ThisKey="Aud_FileTypeId" OtherKey="For_ID" Type="jkp_FileType" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_Audio" Member="jkp_Person" ThisKey="Aud_Presenter" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_AudioActivity" Member="jkp_AudioActivities">
+    <Type Name="jkp_AudioActivity">
+      <Column Name="AA_Aud_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AA_Act_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="jkp_Activity_jkp_AudioActivity" Member="jkp_Activity" ThisKey="AA_Act_ID" OtherKey="Act_ID" Type="jkp_Activity" IsForeignKey="true" />
+      <Association Name="jkp_Audio_jkp_AudioActivity" Member="jkp_Audio" ThisKey="AA_Aud_ID" OtherKey="Aud_ID" Type="jkp_Audio" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Authority" Member="jkp_Authorities">
+    <Type Name="jkp_Authority">
+      <Column Name="Auth_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Auth_Role" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Auth_Description" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="jkp_Authority_jkp_AuthorityMediaAction" Member="jkp_AuthorityMediaActions" ThisKey="Auth_ID" OtherKey="AMA_Auth_ID" Type="jkp_AuthorityMediaAction" />
+      <Association Name="jkp_Authority_jkp_AuthorityTablesAction" Member="jkp_AuthorityTablesActions" ThisKey="Auth_ID" OtherKey="ATA_Auth_ID" Type="jkp_AuthorityTablesAction" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_AuthorityMediaActions" Member="jkp_AuthorityMediaActions">
+    <Type Name="jkp_AuthorityMediaAction">
+      <Column Name="AMA_Auth_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AMA_M_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AMA_A_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AMA_Default" Type="System.Char" DbType="VarChar(1)" CanBeNull="true" />
+      <Association Name="jkp_Action_jkp_AuthorityMediaAction" Member="jkp_Action" ThisKey="AMA_A_ID" OtherKey="A_ID" Type="jkp_Action" IsForeignKey="true" />
+      <Association Name="jkp_Authority_jkp_AuthorityMediaAction" Member="jkp_Authority" ThisKey="AMA_Auth_ID" OtherKey="Auth_ID" Type="jkp_Authority" IsForeignKey="true" />
+      <Association Name="jkp_Media_jkp_AuthorityMediaAction" Member="jkp_Media" ThisKey="AMA_M_ID" OtherKey="M_ID" Type="jkp_Media" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_AuthorityTablesActions" Member="jkp_AuthorityTablesActions">
+    <Type Name="jkp_AuthorityTablesAction">
+      <Column Name="ATA_Auth_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ATA_T_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ATA_A_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ATA_Default" Type="System.Char" DbType="VarChar(1)" CanBeNull="true" />
+      <Association Name="jkp_Action_jkp_AuthorityTablesAction" Member="jkp_Action" ThisKey="ATA_A_ID" OtherKey="A_ID" Type="jkp_Action" IsForeignKey="true" />
+      <Association Name="jkp_Authority_jkp_AuthorityTablesAction" Member="jkp_Authority" ThisKey="ATA_Auth_ID" OtherKey="Auth_ID" Type="jkp_Authority" IsForeignKey="true" />
+      <Association Name="jkp_Table_jkp_AuthorityTablesAction" Member="jkp_Table" ThisKey="ATA_T_ID" OtherKey="T_ID" Type="jkp_Table" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Book" Member="jkp_Books">
+    <Type Name="jkp_Book">
+      <Column Name="Bk_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Bk_Pathname" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Bk_Size" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Bk_DateAdded" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Bk_DateModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Bk_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Bk_Genre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Bk_Language" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Bk_Edition" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Bk_Publisher" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Bk_Subject" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Bk_Contents" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Bk_Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Bk_Summary" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Bk_Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Bk_Coll_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Bk_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Bk_FileTypeId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Bk_PreviewSmallUrl" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Bk_PreviewMediumUrl" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Bk_Author" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Bk_Featured" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="jkp_Book_jkp_BookActivity" Member="jkp_BookActivities" ThisKey="Bk_ID" OtherKey="BA_Bk_ID" Type="jkp_BookActivity" />
+      <Association Name="jkp_Book_jkp_MediaRole" Member="jkp_MediaRoles" ThisKey="Bk_ID" OtherKey="BookId" Type="jkp_MediaRole" />
+      <Association Name="jkp_Book_jkp_PersonBook" Member="jkp_PersonBooks" ThisKey="Bk_ID" OtherKey="PB_Bk_ID" Type="jkp_PersonBook" />
+      <Association Name="jkp_Collection_jkp_Book" Member="jkp_Collection" ThisKey="Bk_Coll_ID" OtherKey="Coll_ID" Type="jkp_Collection" IsForeignKey="true" />
+      <Association Name="jkp_FileType_jkp_Book" Member="jkp_FileType" ThisKey="Bk_FileTypeId" OtherKey="For_ID" Type="jkp_FileType" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_Book" Member="jkp_Person" ThisKey="Bk_Author" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_BookActivity" Member="jkp_BookActivities">
+    <Type Name="jkp_BookActivity">
+      <Column Name="BA_Bk_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BA_Act_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="jkp_Activity_jkp_BookActivity" Member="jkp_Activity" ThisKey="BA_Act_ID" OtherKey="Act_ID" Type="jkp_Activity" IsForeignKey="true" />
+      <Association Name="jkp_Book_jkp_BookActivity" Member="jkp_Book" ThisKey="BA_Bk_ID" OtherKey="Bk_ID" Type="jkp_Book" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Building" Member="jkp_Buildings">
+    <Type Name="jkp_Building">
+      <Column Name="Bld_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Bld_Ham_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Bld_VietnameseName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Bld_EnglishName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Bld_LocalName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Bld_Directions" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Bld_Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Bld_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="jkp_Building_jkp_Room" Member="jkp_Rooms" ThisKey="Bld_ID" OtherKey="Rm_Bld_ID" Type="jkp_Room" />
+      <Association Name="jkp_Hamlet_jkp_Building" Member="jkp_Hamlet" ThisKey="Bld_Ham_ID" OtherKey="Ham_ID" Type="jkp_Hamlet" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Collection" Member="jkp_Collections">
+    <Type Name="jkp_Collection">
+      <Column Name="Coll_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Coll_Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Coll_Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="jkp_Collection_jkp_Audio" Member="jkp_Audios" ThisKey="Coll_ID" OtherKey="Aud_Coll_ID" Type="jkp_Audio" />
+      <Association Name="jkp_Collection_jkp_Book" Member="jkp_Books" ThisKey="Coll_ID" OtherKey="Bk_Coll_ID" Type="jkp_Book" />
+      <Association Name="jkp_Collection_jkp_Document" Member="jkp_Documents" ThisKey="Coll_ID" OtherKey="Doc_Coll_ID" Type="jkp_Document" />
+      <Association Name="jkp_Collection_jkp_Image" Member="jkp_Images" ThisKey="Coll_ID" OtherKey="Img_Coll_ID" Type="jkp_Image" />
+      <Association Name="jkp_Collection_jkp_Video" Member="jkp_Videos" ThisKey="Coll_ID" OtherKey="Vid_Coll_ID" Type="jkp_Video" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Contact" Member="jkp_Contacts">
+    <Type Name="jkp_Contact">
+      <Column Name="Contact_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Contact_Type" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Contact_Permission" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Contact_Ham_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="jkp_Hamlet_jkp_Contact" Member="jkp_Hamlet" ThisKey="Contact_Ham_ID" OtherKey="Ham_ID" Type="jkp_Hamlet" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Contribution" Member="jkp_Contributions">
+    <Type Name="jkp_Contribution">
+      <Column Name="Cont_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Cont_Off_Per_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Cont_Rec_Per_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Cont_Type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cont_AmountPaid" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="Cont_Currency" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cont_ExchangeRate" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="Cont_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Cont_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Cont_Transaction_ID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cont_TotalPrice" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="Cont_RefundedAmount" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="Cont_PaymentMethodTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="jkp_Contribution_jkp_ContributionAccount" Member="jkp_ContributionAccounts" ThisKey="Cont_ID" OtherKey="CA_Cont_ID" Type="jkp_ContributionAccount" />
+      <Association Name="jkp_Contribution_jkp_PersonAttendingRetreat" Member="jkp_PersonAttendingRetreats" ThisKey="Cont_ID" OtherKey="PAR_ContributionId" Type="jkp_PersonAttendingRetreat" />
+      <Association Name="jkp_Contribution_jkp_PersonContributionRetreat" Member="jkp_PersonContributionRetreats" ThisKey="Cont_ID" OtherKey="PCR_Cont_ID" Type="jkp_PersonContributionRetreat" />
+      <Association Name="jkp_Person_jkp_Contribution" Member="jkp_Person" ThisKey="Cont_Off_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_Contribution1" Member="jkp_Person1" ThisKey="Cont_Rec_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_ContributionAccount" Member="jkp_ContributionAccounts">
+    <Type Name="jkp_ContributionAccount">
+      <Column Name="CA_Cont_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CA_Acc_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="jkp_Account_jkp_ContributionAccount" Member="jkp_Account" ThisKey="CA_Acc_ID" OtherKey="Acc_ID" Type="jkp_Account" IsForeignKey="true" />
+      <Association Name="jkp_Contribution_jkp_ContributionAccount" Member="jkp_Contribution" ThisKey="CA_Cont_ID" OtherKey="Cont_ID" Type="jkp_Contribution" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_DiscussionGroup" Member="jkp_DiscussionGroups">
+    <Type Name="jkp_DiscussionGroup">
+      <Column Name="DGroup_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DGroup_Name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="DGroup_Location" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="DGroup_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DGroup_RetreatID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="jkp_DiscussionGroup_jkp_PersonDiscussionGroup" Member="jkp_PersonDiscussionGroups" ThisKey="DGroup_ID" OtherKey="PDG_DGroup_ID" Type="jkp_PersonDiscussionGroup" />
+      <Association Name="jkp_Retreat_jkp_DiscussionGroup" Member="jkp_Retreat" ThisKey="DGroup_RetreatID" OtherKey="Ret_ID" Type="jkp_Retreat" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Document" Member="jkp_Documents">
+    <Type Name="jkp_Document">
+      <Column Name="Doc_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Doc_Format" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Doc_Pathname" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Doc_Size" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Doc_DateAdded" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Doc_DateModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Doc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Doc_Genre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Doc_Language" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Doc_Subject" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Doc_Contents" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Doc_Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Doc_Summary" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Doc_Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Doc_Coll_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Doc_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Doc_Creator" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="jkp_Document_jkp_DocumentActivity" Member="jkp_DocumentActivities" ThisKey="Doc_ID" OtherKey="DA_Doc_ID" Type="jkp_DocumentActivity" />
+      <Association Name="jkp_Document_jkp_PersonDocument" Member="jkp_PersonDocuments" ThisKey="Doc_ID" OtherKey="PD_Doc_ID" Type="jkp_PersonDocument" />
+      <Association Name="jkp_Collection_jkp_Document" Member="jkp_Collection" ThisKey="Doc_Coll_ID" OtherKey="Coll_ID" Type="jkp_Collection" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_Document" Member="jkp_Person" ThisKey="Doc_Creator" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_DocumentActivity" Member="jkp_DocumentActivities">
+    <Type Name="jkp_DocumentActivity">
+      <Column Name="DA_Doc_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DA_Act_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="jkp_Activity_jkp_DocumentActivity" Member="jkp_Activity" ThisKey="DA_Act_ID" OtherKey="Act_ID" Type="jkp_Activity" IsForeignKey="true" />
+      <Association Name="jkp_Document_jkp_DocumentActivity" Member="jkp_Document" ThisKey="DA_Doc_ID" OtherKey="Doc_ID" Type="jkp_Document" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_DriversLicense" Member="jkp_DriversLicenses">
+    <Type Name="jkp_DriversLicense">
+      <Column Name="DrvLic_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DrvLic_Per_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="DrvLic_Number" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="DrvLic_Country" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="DrvLic_State" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="DrvLic_DateIssued" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DrvLic_DateExpires" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DrvLic_Class" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="DrvLic_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="jkp_Person_jkp_DriversLicense" Member="jkp_Person" ThisKey="DrvLic_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_FamilyGroup" Member="jkp_FamilyGroups">
+    <Type Name="jkp_FamilyGroup">
+      <Column Name="FGroup_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FGroup_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="jkp_FamilyGroup_jkp_Person" Member="jkp_Persons" ThisKey="FGroup_ID" OtherKey="Per_FGroup_ID" Type="jkp_Person" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_FileType" Member="jkp_FileTypes">
+    <Type Name="jkp_FileType">
+      <Column Name="For_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="For_Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="For_IconPictureUrl" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="For_Extension" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="jkp_FileType_jkp_Audio" Member="jkp_Audios" ThisKey="For_ID" OtherKey="Aud_FileTypeId" Type="jkp_Audio" />
+      <Association Name="jkp_FileType_jkp_Book" Member="jkp_Books" ThisKey="For_ID" OtherKey="Bk_FileTypeId" Type="jkp_Book" />
+      <Association Name="jkp_FileType_jkp_Video" Member="jkp_Videos" ThisKey="For_ID" OtherKey="Vid_FileTypeId" Type="jkp_Video" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_GeneralQuestions" Member="jkp_GeneralQuestions">
+    <Type Name="jkp_GeneralQuestion">
+      <Column Name="GenQues_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="GenQues_Question" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="jkp_GeneralQuestion_jkp_PersonGeneralQuestion" Member="jkp_PersonGeneralQuestions" ThisKey="GenQues_ID" OtherKey="PGQ_GenQues_ID" Type="jkp_PersonGeneralQuestion" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Hamlet" Member="jkp_Hamlets">
+    <Type Name="jkp_Hamlet">
+      <Column Name="Ham_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ham_Site_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Ham_Add_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Ham_VietnameseName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Ham_EnglishName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Ham_LocalName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Ham_Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Ham_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="jkp_Hamlet_jkp_Building" Member="jkp_Buildings" ThisKey="Ham_ID" OtherKey="Bld_Ham_ID" Type="jkp_Building" />
+      <Association Name="jkp_Hamlet_jkp_Contact" Member="jkp_Contacts" ThisKey="Ham_ID" OtherKey="Contact_Ham_ID" Type="jkp_Contact" />
+      <Association Name="jkp_Address_jkp_Hamlet" Member="jkp_Address" ThisKey="Ham_Add_ID" OtherKey="Add_ID" Type="jkp_Address" IsForeignKey="true" />
+      <Association Name="jkp_Site_jkp_Hamlet" Member="jkp_Site" ThisKey="Ham_Site_ID" OtherKey="Site_ID" Type="jkp_Site" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Image" Member="jkp_Images">
+    <Type Name="jkp_Image">
+      <Column Name="Img_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Img_Format" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Img_Pathname" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Img_Size" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Img_DateAdded" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Img_DateModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Img_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Img_Genre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Img_Subject" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Img_Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Img_Caption" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Img_Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Img_Coll_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Img_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Img_Featured" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="jkp_Image_jkp_ImageActivity" Member="jkp_ImageActivities" ThisKey="Img_ID" OtherKey="IA_Img_ID" Type="jkp_ImageActivity" />
+      <Association Name="jkp_Image_jkp_MediaRole" Member="jkp_MediaRoles" ThisKey="Img_ID" OtherKey="ImageId" Type="jkp_MediaRole" />
+      <Association Name="jkp_Image_jkp_PersonImage" Member="jkp_PersonImages" ThisKey="Img_ID" OtherKey="PI_Img_ID" Type="jkp_PersonImage" />
+      <Association Name="jkp_Collection_jkp_Image" Member="jkp_Collection" ThisKey="Img_Coll_ID" OtherKey="Coll_ID" Type="jkp_Collection" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_ImageActivity" Member="jkp_ImageActivities">
+    <Type Name="jkp_ImageActivity">
+      <Column Name="IA_Img_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IA_Act_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="jkp_Activity_jkp_ImageActivity" Member="jkp_Activity" ThisKey="IA_Act_ID" OtherKey="Act_ID" Type="jkp_Activity" IsForeignKey="true" />
+      <Association Name="jkp_Image_jkp_ImageActivity" Member="jkp_Image" ThisKey="IA_Img_ID" OtherKey="Img_ID" Type="jkp_Image" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Languages" Member="jkp_Languages">
+    <Type Name="jkp_Language">
+      <Column Name="Lang_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Lang_DisplayName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Lang_BrowserCode" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Association Name="jkp_Language_jkp_Article" Member="jkp_Articles" ThisKey="Lang_ID" OtherKey="Art_LanguageId" Type="jkp_Article" />
+      <Association Name="jkp_Language_jkp_Retreat" Member="jkp_Retreats" ThisKey="Lang_ID" OtherKey="Ret_LanguageId" Type="jkp_Retreat" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Media" Member="jkp_Medias">
+    <Type Name="jkp_Media">
+      <Column Name="M_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="M_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="jkp_Media_jkp_AuthorityMediaAction" Member="jkp_AuthorityMediaActions" ThisKey="M_ID" OtherKey="AMA_M_ID" Type="jkp_AuthorityMediaAction" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_MediaRole" Member="jkp_MediaRoles">
+    <Type Name="jkp_MediaRole">
+      <Column Name="MediaRoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="VideoId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="AudioId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="ImageId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="BookId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="PersonId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="DocumentId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="aspnet_Role_jkp_MediaRole" Member="aspnet_Role" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_Role" IsForeignKey="true" />
+      <Association Name="jkp_Audio_jkp_MediaRole" Member="jkp_Audio" ThisKey="AudioId" OtherKey="Aud_ID" Type="jkp_Audio" IsForeignKey="true" />
+      <Association Name="jkp_Book_jkp_MediaRole" Member="jkp_Book" ThisKey="BookId" OtherKey="Bk_ID" Type="jkp_Book" IsForeignKey="true" />
+      <Association Name="jkp_Image_jkp_MediaRole" Member="jkp_Image" ThisKey="ImageId" OtherKey="Img_ID" Type="jkp_Image" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_MediaRole" Member="jkp_Person" ThisKey="PersonId" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+      <Association Name="jkp_Video_jkp_MediaRole" Member="jkp_Video" ThisKey="VideoId" OtherKey="Vid_ID" Type="jkp_Video" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_MedicalQuestions" Member="jkp_MedicalQuestions">
+    <Type Name="jkp_MedicalQuestion">
+      <Column Name="MedQues_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MedQues_Question" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="jkp_MedicalQuestion_jkp_PersonMedicalQuestion" Member="jkp_PersonMedicalQuestions" ThisKey="MedQues_ID" OtherKey="PMQ_MedQues_ID" Type="jkp_PersonMedicalQuestion" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_OrdinationFamily" Member="jkp_OrdinationFamilies">
+    <Type Name="jkp_OrdinationFamily">
+      <Column Name="OrdFamily_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="OrdFamily_Name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="OrdFamily_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="jkp_OrdinationFamily_jkp_Person" Member="jkp_Persons" ThisKey="OrdFamily_ID" OtherKey="Per_OrdFamily_ID" Type="jkp_Person" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Passport" Member="jkp_Passports">
+    <Type Name="jkp_Passport">
+      <Column Name="Pass_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Pass_Per_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Pass_Number" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Pass_Nationality" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Pass_DateIssued" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Pass_DateExpires" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Pass_Authority" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Pass_Image" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Association Name="jkp_Person_jkp_Passport" Member="jkp_Person" ThisKey="Pass_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Person" Member="jkp_Persons">
+    <Type Name="jkp_Person">
+      <Column Name="Per_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Per_FirstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Per_LastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Per_DharmaName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Per_LineageName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Per_Gender" Type="System.Char" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="Per_Nationality" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Per_PrimaryLanguage" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Per_SecondaryLanguage" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Per_PlaceOfBirth" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Per_Birthdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Per_DeathDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Per_HomePhoneNumber" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Per_CellPhoneNumber" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Per_WorkPhoneNumber" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Per_Active" Type="System.Char" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="Per_Fax" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Per_Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Per_SanghaRole" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Per_FGroup_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Per_OrdFamily_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Per_San_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Per_Rm_ID" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Per_Add_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="jkp_Person_jkp_Visa" Member="jkp_Visas" ThisKey="Per_ID" OtherKey="Visa_Per_ID" Type="jkp_Visa" />
+      <Association Name="jkp_Person_aspnet_Membership" Member="aspnet_Memberships" ThisKey="Per_ID" OtherKey="PersonId" Type="aspnet_Membership" />
+      <Association Name="jkp_Person_jkp_Article" Member="jkp_Articles" ThisKey="Per_ID" OtherKey="Art_AuthorPersonId" Type="jkp_Article" />
+      <Association Name="jkp_Person_jkp_Audio" Member="jkp_Audios" ThisKey="Per_ID" OtherKey="Aud_Presenter" Type="jkp_Audio" />
+      <Association Name="jkp_Person_jkp_Book" Member="jkp_Books" ThisKey="Per_ID" OtherKey="Bk_Author" Type="jkp_Book" />
+      <Association Name="jkp_Person_jkp_Contribution" Member="jkp_Contributions" ThisKey="Per_ID" OtherKey="Cont_Off_Per_ID" Type="jkp_Contribution" />
+      <Association Name="jkp_Person_jkp_Contribution1" Member="jkp_Contributions1" ThisKey="Per_ID" OtherKey="Cont_Rec_Per_ID" Type="jkp_Contribution" />
+      <Association Name="jkp_Person_jkp_Document" Member="jkp_Documents" ThisKey="Per_ID" OtherKey="Doc_Creator" Type="jkp_Document" />
+      <Association Name="jkp_Person_jkp_DriversLicense" Member="jkp_DriversLicenses" ThisKey="Per_ID" OtherKey="DrvLic_Per_ID" Type="jkp_DriversLicense" />
+      <Association Name="jkp_Person_jkp_MediaRole" Member="jkp_MediaRoles" ThisKey="Per_ID" OtherKey="PersonId" Type="jkp_MediaRole" />
+      <Association Name="jkp_Person_jkp_Passport" Member="jkp_Passports" ThisKey="Per_ID" OtherKey="Pass_Per_ID" Type="jkp_Passport" />
+      <Association Name="jkp_Person_jkp_Person" Member="jkp_Person2" ThisKey="Per_ID" OtherKey="Per_ID" Type="jkp_Person" Cardinality="One" />
+      <Association Name="jkp_Person_jkp_PersonActivity" Member="jkp_PersonActivities" ThisKey="Per_ID" OtherKey="PAct_Per_ID" Type="jkp_PersonActivity" />
+      <Association Name="jkp_Person_jkp_PersonAssignmentActivity" Member="jkp_PersonAssignmentActivities" ThisKey="Per_ID" OtherKey="PAA_Per_ID" Type="jkp_PersonAssignmentActivity" />
+      <Association Name="jkp_Person_jkp_PersonAssignmentRetreat" Member="jkp_PersonAssignmentRetreats" ThisKey="Per_ID" OtherKey="PAR_Per_ID" Type="jkp_PersonAssignmentRetreat" />
+      <Association Name="jkp_Person_jkp_PersonAttendingRetreat" Member="jkp_PersonAttendingRetreats" ThisKey="Per_ID" OtherKey="PAR_PersonId" Type="jkp_PersonAttendingRetreat" />
+      <Association Name="jkp_Person_jkp_PersonAudio" Member="jkp_PersonAudios" ThisKey="Per_ID" OtherKey="PA_Per_ID" Type="jkp_PersonAudio" />
+      <Association Name="jkp_Person_jkp_PersonBook" Member="jkp_PersonBooks" ThisKey="Per_ID" OtherKey="PB_Per_ID" Type="jkp_PersonBook" />
+      <Association Name="jkp_Person_jkp_PersonContributionRetreat" Member="jkp_PersonContributionRetreats" ThisKey="Per_ID" OtherKey="PCR_Per_ID" Type="jkp_PersonContributionRetreat" />
+      <Association Name="jkp_Person_jkp_PersonDiscussionGroup" Member="jkp_PersonDiscussionGroups" ThisKey="Per_ID" OtherKey="PDG_Per_ID" Type="jkp_PersonDiscussionGroup" />
+      <Association Name="jkp_Person_jkp_PersonDocument" Member="jkp_PersonDocuments" ThisKey="Per_ID" OtherKey="PD_Per_ID" Type="jkp_PersonDocument" />
+      <Association Name="jkp_Person_jkp_PersonGeneralQuestion" Member="jkp_PersonGeneralQuestions" ThisKey="Per_ID" OtherKey="PGQ_Per_ID" Type="jkp_PersonGeneralQuestion" />
+      <Association Name="jkp_Person_jkp_PersonImage" Member="jkp_PersonImages" ThisKey="Per_ID" OtherKey="PI_Per_ID" Type="jkp_PersonImage" />
+      <Association Name="jkp_Person_jkp_PersonMedicalQuestion" Member="jkp_PersonMedicalQuestions" ThisKey="Per_ID" OtherKey="PMQ_Per_ID" Type="jkp_PersonMedicalQuestion" />
+      <Association Name="jkp_Person_jkp_PersonReceivesTraining" Member="jkp_PersonReceivesTrainings" ThisKey="Per_ID" OtherKey="PRT_Per_ID" Type="jkp_PersonReceivesTraining" />
+      <Association Name="jkp_Person_jkp_PersonSangha" Member="jkp_PersonSanghas" ThisKey="Per_ID" OtherKey="PS_Per_ID" Type="jkp_PersonSangha" />
+      <Association Name="jkp_Person_jkp_PersonTransmitsTraining" Member="jkp_PersonTransmitsTrainings" ThisKey="Per_ID" OtherKey="PTT_Per_ID" Type="jkp_PersonTransmitsTraining" />
+      <Association Name="jkp_Person_jkp_PersonVideo" Member="jkp_PersonVideos" ThisKey="Per_ID" OtherKey="PV_Per_ID" Type="jkp_PersonVideo" />
+      <Association Name="jkp_Person_jkp_Video" Member="jkp_Videos" ThisKey="Per_ID" OtherKey="Vid_Presenter" Type="jkp_Video" />
+      <Association Name="jkp_Person_jkp_Person" Member="jkp_Person1" ThisKey="Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+      <Association Name="jkp_Address_jkp_Person" Member="jkp_Address" ThisKey="Per_Add_ID" OtherKey="Add_ID" Type="jkp_Address" IsForeignKey="true" />
+      <Association Name="jkp_FamilyGroup_jkp_Person" Member="jkp_FamilyGroup" ThisKey="Per_FGroup_ID" OtherKey="FGroup_ID" Type="jkp_FamilyGroup" IsForeignKey="true" />
+      <Association Name="jkp_OrdinationFamily_jkp_Person" Member="jkp_OrdinationFamily" ThisKey="Per_OrdFamily_ID" OtherKey="OrdFamily_ID" Type="jkp_OrdinationFamily" IsForeignKey="true" />
+      <Association Name="jkp_Sangha_jkp_Person" Member="jkp_Sangha" ThisKey="Per_San_ID" OtherKey="San_ID" Type="jkp_Sangha" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_PersonActivity" Member="jkp_PersonActivities">
+    <Type Name="jkp_PersonActivity">
+      <Column Name="PAct_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PAct_Per_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="PAct_Act_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="jkp_Activity_jkp_PersonActivity" Member="jkp_Activity" ThisKey="PAct_Act_ID" OtherKey="Act_ID" Type="jkp_Activity" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_PersonActivity" Member="jkp_Person" ThisKey="PAct_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_PersonAssignmentActivity" Member="jkp_PersonAssignmentActivities">
+    <Type Name="jkp_PersonAssignmentActivity">
+      <Column Name="PAA_Per_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PAA_Assn_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PAA_Act_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="jkp_Activity_jkp_PersonAssignmentActivity" Member="jkp_Activity" ThisKey="PAA_Act_ID" OtherKey="Act_ID" Type="jkp_Activity" IsForeignKey="true" />
+      <Association Name="jkp_Assignment_jkp_PersonAssignmentActivity" Member="jkp_Assignment" ThisKey="PAA_Assn_ID" OtherKey="Assn_ID" Type="jkp_Assignment" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_PersonAssignmentActivity" Member="jkp_Person" ThisKey="PAA_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_PersonAssignmentRetreat" Member="jkp_PersonAssignmentRetreats">
+    <Type Name="jkp_PersonAssignmentRetreat">
+      <Column Name="PAR_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PAR_Per_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="PAR_Assn_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="PAR_Ret_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="jkp_Assignment_jkp_PersonAssignmentRetreat" Member="jkp_Assignment" ThisKey="PAR_Assn_ID" OtherKey="Assn_ID" Type="jkp_Assignment" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_PersonAssignmentRetreat" Member="jkp_Person" ThisKey="PAR_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+      <Association Name="jkp_Retreat_jkp_PersonAssignmentRetreat" Member="jkp_Retreat" ThisKey="PAR_Ret_ID" OtherKey="Ret_ID" Type="jkp_Retreat" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_PersonAttendingRetreat" Member="jkp_PersonAttendingRetreats">
+    <Type Name="jkp_PersonAttendingRetreat">
+      <Column Name="PAR_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PAR_RetId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="PAR_PersonId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="PAR_RoomId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="PAR_ContributionId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="PAR_RoomTypeId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="PAR_ArrivalTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PAR_DepartureTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PAR_InititalCostOfSpotAtSignup" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Association Name="jkp_Contribution_jkp_PersonAttendingRetreat" Member="jkp_Contribution" ThisKey="PAR_ContributionId" OtherKey="Cont_ID" Type="jkp_Contribution" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_PersonAttendingRetreat" Member="jkp_Person" ThisKey="PAR_PersonId" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+      <Association Name="jkp_Retreat_jkp_PersonAttendingRetreat" Member="jkp_Retreat" ThisKey="PAR_RetId" OtherKey="Ret_ID" Type="jkp_Retreat" IsForeignKey="true" />
+      <Association Name="jkp_Room_jkp_PersonAttendingRetreat" Member="jkp_Room" ThisKey="PAR_RoomId" OtherKey="Rm_ID" Type="jkp_Room" IsForeignKey="true" DeleteRule="SET NULL" />
+      <Association Name="jkp_RoomType_jkp_PersonAttendingRetreat" Member="jkp_RoomType" ThisKey="PAR_RoomTypeId" OtherKey="RmType_ID" Type="jkp_RoomType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_PersonAudio" Member="jkp_PersonAudios">
+    <Type Name="jkp_PersonAudio">
+      <Column Name="PA_Per_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PA_Aud_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PA_Aud_Role" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="jkp_Audio_jkp_PersonAudio" Member="jkp_Audio" ThisKey="PA_Aud_ID" OtherKey="Aud_ID" Type="jkp_Audio" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_PersonAudio" Member="jkp_Person" ThisKey="PA_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_PersonBook" Member="jkp_PersonBooks">
+    <Type Name="jkp_PersonBook">
+      <Column Name="PB_Per_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PB_Bk_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PA_Bk_Role" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="jkp_Book_jkp_PersonBook" Member="jkp_Book" ThisKey="PB_Bk_ID" OtherKey="Bk_ID" Type="jkp_Book" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_PersonBook" Member="jkp_Person" ThisKey="PB_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_PersonContributionRetreat" Member="jkp_PersonContributionRetreats">
+    <Type Name="jkp_PersonContributionRetreat">
+      <Column Name="PCR_Per_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PCR_Ret_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PCR_Cont_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="jkp_Contribution_jkp_PersonContributionRetreat" Member="jkp_Contribution" ThisKey="PCR_Cont_ID" OtherKey="Cont_ID" Type="jkp_Contribution" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_PersonContributionRetreat" Member="jkp_Person" ThisKey="PCR_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+      <Association Name="jkp_Retreat_jkp_PersonContributionRetreat" Member="jkp_Retreat" ThisKey="PCR_Ret_ID" OtherKey="Ret_ID" Type="jkp_Retreat" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_PersonDiscussionGroup" Member="jkp_PersonDiscussionGroups">
+    <Type Name="jkp_PersonDiscussionGroup">
+      <Column Name="PDG_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PDG_Per_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="PDG_DGroup_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="jkp_DiscussionGroup_jkp_PersonDiscussionGroup" Member="jkp_DiscussionGroup" ThisKey="PDG_DGroup_ID" OtherKey="DGroup_ID" Type="jkp_DiscussionGroup" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_PersonDiscussionGroup" Member="jkp_Person" ThisKey="PDG_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_PersonDocument" Member="jkp_PersonDocuments">
+    <Type Name="jkp_PersonDocument">
+      <Column Name="PD_Per_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PD_Doc_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PA_Doc_Role" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="jkp_Document_jkp_PersonDocument" Member="jkp_Document" ThisKey="PD_Doc_ID" OtherKey="Doc_ID" Type="jkp_Document" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_PersonDocument" Member="jkp_Person" ThisKey="PD_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_PersonGeneralQuestions" Member="jkp_PersonGeneralQuestions">
+    <Type Name="jkp_PersonGeneralQuestion">
+      <Column Name="PGQ_Per_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PGQ_GenQues_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PGQ_GeneralAnswer" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="jkp_GeneralQuestion_jkp_PersonGeneralQuestion" Member="jkp_GeneralQuestion" ThisKey="PGQ_GenQues_ID" OtherKey="GenQues_ID" Type="jkp_GeneralQuestion" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_PersonGeneralQuestion" Member="jkp_Person" ThisKey="PGQ_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_PersonImage" Member="jkp_PersonImages">
+    <Type Name="jkp_PersonImage">
+      <Column Name="PI_Per_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PI_Img_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PA_Img_Role" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="jkp_Image_jkp_PersonImage" Member="jkp_Image" ThisKey="PI_Img_ID" OtherKey="Img_ID" Type="jkp_Image" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_PersonImage" Member="jkp_Person" ThisKey="PI_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_PersonMedicalQuestions" Member="jkp_PersonMedicalQuestions">
+    <Type Name="jkp_PersonMedicalQuestion">
+      <Column Name="PMQ_Per_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PMQ_MedQues_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PMQ_MedicalAnswer" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="jkp_MedicalQuestion_jkp_PersonMedicalQuestion" Member="jkp_MedicalQuestion" ThisKey="PMQ_MedQues_ID" OtherKey="MedQues_ID" Type="jkp_MedicalQuestion" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_PersonMedicalQuestion" Member="jkp_Person" ThisKey="PMQ_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_PersonReceivesTraining" Member="jkp_PersonReceivesTrainings">
+    <Type Name="jkp_PersonReceivesTraining">
+      <Column Name="PRT_Per_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PRT_Train_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="jkp_Person_jkp_PersonReceivesTraining" Member="jkp_Person" ThisKey="PRT_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+      <Association Name="jkp_Training_jkp_PersonReceivesTraining" Member="jkp_Training" ThisKey="PRT_Train_ID" OtherKey="Train_ID" Type="jkp_Training" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_PersonSangha" Member="jkp_PersonSanghas">
+    <Type Name="jkp_PersonSangha">
+      <Column Name="PS_Per_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PS_San_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="jkp_Person_jkp_PersonSangha" Member="jkp_Person" ThisKey="PS_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+      <Association Name="jkp_Sangha_jkp_PersonSangha" Member="jkp_Sangha" ThisKey="PS_San_ID" OtherKey="San_ID" Type="jkp_Sangha" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_PersonTransmitsTraining" Member="jkp_PersonTransmitsTrainings">
+    <Type Name="jkp_PersonTransmitsTraining">
+      <Column Name="PTT_Per_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PTT_Train_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="jkp_Person_jkp_PersonTransmitsTraining" Member="jkp_Person" ThisKey="PTT_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+      <Association Name="jkp_Training_jkp_PersonTransmitsTraining" Member="jkp_Training" ThisKey="PTT_Train_ID" OtherKey="Train_ID" Type="jkp_Training" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_PersonVideo" Member="jkp_PersonVideos">
+    <Type Name="jkp_PersonVideo">
+      <Column Name="PV_Per_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PV_Vid_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PA_Vid_Role" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="jkp_Person_jkp_PersonVideo" Member="jkp_Person" ThisKey="PV_Per_ID" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+      <Association Name="jkp_Video_jkp_PersonVideo" Member="jkp_Video" ThisKey="PV_Vid_ID" OtherKey="Vid_ID" Type="jkp_Video" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Rate" Member="jkp_Rates">
+    <Type Name="jkp_Rate">
+      <Column Name="Rt_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Rt_BaseAmount" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Rt_Currency" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="jkp_Rate_jkp_RoomRate" Member="jkp_RoomRates" ThisKey="Rt_ID" OtherKey="RR_Rt_ID" Type="jkp_RoomRate" />
+      <Association Name="jkp_Rate_jkp_RoomType" Member="jkp_RoomTypes" ThisKey="Rt_ID" OtherKey="RmType_RateId" Type="jkp_RoomType" />
+      <Association Name="jkp_Rate_jkp_RoomTypeRate" Member="jkp_RoomTypeRates" ThisKey="Rt_ID" OtherKey="RTR_Rt_ID" Type="jkp_RoomTypeRate" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Retreat" Member="jkp_Retreats">
+    <Type Name="jkp_Retreat">
+      <Column Name="Ret_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ret_Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Ret_StartDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Ret_EndDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Ret_Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Ret_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Ret_Site_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Ret_TotalCapacity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Ret_LanguageId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Ret_AllowRegistrationDuringRetreat" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Ret_InformationForAttendingRetreat" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Ret_GlobalRateModifier" Type="System.Decimal" DbType="Decimal(2,2)" CanBeNull="true" />
+      <Association Name="jkp_Retreat_jkp_Activity" Member="jkp_Activities" ThisKey="Ret_ID" OtherKey="Act_Ret_ID" Type="jkp_Activity" />
+      <Association Name="jkp_Retreat_jkp_Assignment" Member="jkp_Assignments" ThisKey="Ret_ID" OtherKey="Assn_RetreatId" Type="jkp_Assignment" />
+      <Association Name="jkp_Retreat_jkp_DiscussionGroup" Member="jkp_DiscussionGroups" ThisKey="Ret_ID" OtherKey="DGroup_RetreatID" Type="jkp_DiscussionGroup" />
+      <Association Name="jkp_Retreat_jkp_PersonAssignmentRetreat" Member="jkp_PersonAssignmentRetreats" ThisKey="Ret_ID" OtherKey="PAR_Ret_ID" Type="jkp_PersonAssignmentRetreat" />
+      <Association Name="jkp_Retreat_jkp_PersonAttendingRetreat" Member="jkp_PersonAttendingRetreats" ThisKey="Ret_ID" OtherKey="PAR_RetId" Type="jkp_PersonAttendingRetreat" />
+      <Association Name="jkp_Retreat_jkp_PersonContributionRetreat" Member="jkp_PersonContributionRetreats" ThisKey="Ret_ID" OtherKey="PCR_Ret_ID" Type="jkp_PersonContributionRetreat" />
+      <Association Name="jkp_Language_jkp_Retreat" Member="jkp_Language" ThisKey="Ret_LanguageId" OtherKey="Lang_ID" Type="jkp_Language" IsForeignKey="true" />
+      <Association Name="jkp_Site_jkp_Retreat" Member="jkp_Site" ThisKey="Ret_Site_ID" OtherKey="Site_ID" Type="jkp_Site" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Room" Member="jkp_Rooms">
+    <Type Name="jkp_Room">
+      <Column Name="Rm_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Rm_Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Rm_Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Rm_Bld_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Rm_RmType_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Rm_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Rm_TotalCapacity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Rm_ContructedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Rm_DestroyedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="jkp_Room_jkp_PersonAttendingRetreat" Member="jkp_PersonAttendingRetreats" ThisKey="Rm_ID" OtherKey="PAR_RoomId" Type="jkp_PersonAttendingRetreat" />
+      <Association Name="jkp_Room_jkp_RoomRate" Member="jkp_RoomRates" ThisKey="Rm_ID" OtherKey="RR_Rm_ID" Type="jkp_RoomRate" />
+      <Association Name="jkp_Building_jkp_Room" Member="jkp_Building" ThisKey="Rm_Bld_ID" OtherKey="Bld_ID" Type="jkp_Building" IsForeignKey="true" />
+      <Association Name="jkp_RoomType_jkp_Room" Member="jkp_RoomType" ThisKey="Rm_RmType_ID" OtherKey="RmType_ID" Type="jkp_RoomType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_RoomRate" Member="jkp_RoomRates">
+    <Type Name="jkp_RoomRate">
+      <Column Name="RR_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RR_Rm_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="RR_Rt_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="RR_StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RR_EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="jkp_Room_jkp_RoomRate" Member="jkp_Room" ThisKey="RR_Rm_ID" OtherKey="Rm_ID" Type="jkp_Room" IsForeignKey="true" />
+      <Association Name="jkp_Rate_jkp_RoomRate" Member="jkp_Rate" ThisKey="RR_Rt_ID" OtherKey="Rt_ID" Type="jkp_Rate" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_RoomType" Member="jkp_RoomTypes">
+    <Type Name="jkp_RoomType">
+      <Column Name="RmType_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RmType_Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="RmType_UpperBunkBed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RmType_LowerBunkBed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RmType_SingleBed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RmType_Shower" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RmType_Bathroom" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RmType_AirCondition" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RmType_Heating" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RmType_RateId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="jkp_RoomType_jkp_PersonAttendingRetreat" Member="jkp_PersonAttendingRetreats" ThisKey="RmType_ID" OtherKey="PAR_RoomTypeId" Type="jkp_PersonAttendingRetreat" />
+      <Association Name="jkp_RoomType_jkp_Room" Member="jkp_Rooms" ThisKey="RmType_ID" OtherKey="Rm_RmType_ID" Type="jkp_Room" />
+      <Association Name="jkp_RoomType_jkp_RoomTypeAdjustment" Member="jkp_RoomTypeAdjustments" ThisKey="RmType_ID" OtherKey="RTA_RmType_ID" Type="jkp_RoomTypeAdjustment" />
+      <Association Name="jkp_RoomType_jkp_RoomTypeRate" Member="jkp_RoomTypeRates" ThisKey="RmType_ID" OtherKey="RTR_RmType_ID" Type="jkp_RoomTypeRate" />
+      <Association Name="jkp_Rate_jkp_RoomType" Member="jkp_Rate" ThisKey="RmType_RateId" OtherKey="Rt_ID" Type="jkp_Rate" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_RoomTypeAdjustment" Member="jkp_RoomTypeAdjustments">
+    <Type Name="jkp_RoomTypeAdjustment">
+      <Column Name="RTA_RmType_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RTA_Adjust_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="jkp_Adjustment_jkp_RoomTypeAdjustment" Member="jkp_Adjustment" ThisKey="RTA_Adjust_ID" OtherKey="Adjust_ID" Type="jkp_Adjustment" IsForeignKey="true" />
+      <Association Name="jkp_RoomType_jkp_RoomTypeAdjustment" Member="jkp_RoomType" ThisKey="RTA_RmType_ID" OtherKey="RmType_ID" Type="jkp_RoomType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_RoomTypeRate" Member="jkp_RoomTypeRates">
+    <Type Name="jkp_RoomTypeRate">
+      <Column Name="RTR_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RTR_RmType_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="RTR_Rt_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="RTR_StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RTR_EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="jkp_RoomType_jkp_RoomTypeRate" Member="jkp_RoomType" ThisKey="RTR_RmType_ID" OtherKey="RmType_ID" Type="jkp_RoomType" IsForeignKey="true" />
+      <Association Name="jkp_Rate_jkp_RoomTypeRate" Member="jkp_Rate" ThisKey="RTR_Rt_ID" OtherKey="Rt_ID" Type="jkp_Rate" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Sangha" Member="jkp_Sanghas">
+    <Type Name="jkp_Sangha">
+      <Column Name="San_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="San_Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="San_Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="San_WebSite" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="San_Image" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="San_Summary" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="jkp_Sangha_jkp_Address" Member="jkp_Addresses" ThisKey="San_ID" OtherKey="Add_San_ID" Type="jkp_Address" />
+      <Association Name="jkp_Sangha_jkp_Person" Member="jkp_Persons" ThisKey="San_ID" OtherKey="Per_San_ID" Type="jkp_Person" />
+      <Association Name="jkp_Sangha_jkp_PersonSangha" Member="jkp_PersonSanghas" ThisKey="San_ID" OtherKey="PS_San_ID" Type="jkp_PersonSangha" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Site" Member="jkp_Sites">
+    <Type Name="jkp_Site">
+      <Column Name="Site_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Site_Add_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Site_VietnameseName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Site_EnglishName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Site_LocalName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Site_Website" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Site_Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Site_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="jkp_Site_jkp_Hamlet" Member="jkp_Hamlets" ThisKey="Site_ID" OtherKey="Ham_Site_ID" Type="jkp_Hamlet" />
+      <Association Name="jkp_Site_jkp_Retreat" Member="jkp_Retreats" ThisKey="Site_ID" OtherKey="Ret_Site_ID" Type="jkp_Retreat" />
+      <Association Name="jkp_Address_jkp_Site" Member="jkp_Address" ThisKey="Site_Add_ID" OtherKey="Add_ID" Type="jkp_Address" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Tables" Member="jkp_Tables">
+    <Type Name="jkp_Table">
+      <Column Name="T_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="T_Name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="jkp_Table_jkp_AuthorityTablesAction" Member="jkp_AuthorityTablesActions" ThisKey="T_ID" OtherKey="ATA_T_ID" Type="jkp_AuthorityTablesAction" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Training" Member="jkp_Trainings">
+    <Type Name="jkp_Training">
+      <Column Name="Train_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Train_Act_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Train_Type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="jkp_Training_jkp_PersonReceivesTraining" Member="jkp_PersonReceivesTrainings" ThisKey="Train_ID" OtherKey="PRT_Train_ID" Type="jkp_PersonReceivesTraining" />
+      <Association Name="jkp_Training_jkp_PersonTransmitsTraining" Member="jkp_PersonTransmitsTrainings" ThisKey="Train_ID" OtherKey="PTT_Train_ID" Type="jkp_PersonTransmitsTraining" />
+      <Association Name="jkp_Activity_jkp_Training" Member="jkp_Activity" ThisKey="Train_Act_ID" OtherKey="Act_ID" Type="jkp_Activity" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_Video" Member="jkp_Videos">
+    <Type Name="jkp_Video">
+      <Column Name="Vid_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Vid_Pathname" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Vid_Size" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Vid_Duration" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="Vid_DateAdded" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Vid_DateModified" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Vid_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Vid_Genre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Vid_Language" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Vid_Subject" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Vid_Credits" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Vid_Contents" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Vid_Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Vid_Summary" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Vid_Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Vid_Disc_Number" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Vid_Coll_ID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Vid_Comment" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Vid_FileTypeId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Vid_PreviewSmallUrl" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Vid_PreviewMediumUrl" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Vid_Presenter" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Vid_Featured" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="jkp_Video_jkp_MediaRole" Member="jkp_MediaRoles" ThisKey="Vid_ID" OtherKey="VideoId" Type="jkp_MediaRole" />
+      <Association Name="jkp_Video_jkp_PersonVideo" Member="jkp_PersonVideos" ThisKey="Vid_ID" OtherKey="PV_Vid_ID" Type="jkp_PersonVideo" />
+      <Association Name="jkp_Video_jkp_VideoActivity" Member="jkp_VideoActivities" ThisKey="Vid_ID" OtherKey="VA_Vid_ID" Type="jkp_VideoActivity" />
+      <Association Name="jkp_FileType_jkp_Video" Member="jkp_FileType" ThisKey="Vid_FileTypeId" OtherKey="For_ID" Type="jkp_FileType" IsForeignKey="true" />
+      <Association Name="jkp_Person_jkp_Video" Member="jkp_Person" ThisKey="Vid_Presenter" OtherKey="Per_ID" Type="jkp_Person" IsForeignKey="true" />
+      <Association Name="jkp_Collection_jkp_Video" Member="jkp_Collection" ThisKey="Vid_Coll_ID" OtherKey="Coll_ID" Type="jkp_Collection" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.jkp_VideoActivity" Member="jkp_VideoActivities">
+    <Type Name="jkp_VideoActivity">
+      <Column Name="VA_Vid_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="VA_Act_ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="jkp_Activity_jkp_VideoActivity" Member="jkp_Activity" ThisKey="VA_Act_ID" OtherKey="Act_ID" Type="jkp_Activity" IsForeignKey="true" />
+      <Association Name="jkp_Video_jkp_VideoActivity" Member="jkp_Video" ThisKey="VA_Vid_ID" OtherKey="Vid_ID" Type="jkp_Video" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
